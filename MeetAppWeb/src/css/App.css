@@ -1,0 +1,500 @@
+
+/* NavBar */
+
+
+.navBar{
+    padding: 10px;
+    padding-left: 12rem;
+    padding-right: 12rem;
+    max-width: 100%;
+    height: 45px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    
+}
+.navbarHr{
+    margin-top: 1rem;
+    width: 45%;
+    border: none;
+    border-top: 1px solid #2a2a2a;
+}
+.navbarHrDiv{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+.navBarRight{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 2rem;
+}
+.navbarCartDiv{
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+.navbarCart{
+    margin-right: 5px;
+    font-size: 16px;
+    color: #5f5f5f;
+}
+.navbarCartDiv:hover{
+    .navbarCart{
+        color: #00798A;
+    }
+}
+.navbarProfileDiv{
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+.navbarProfile{
+    margin-right: 2px;
+    font-size: 18px;
+    color: #5f5f5f;
+}
+.navbarProfileDiv:hover{
+    .navbarProfile{
+        color: #00798A;
+    }
+    
+}
+.navbarFavDiv{
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+.navbarFav{
+    margin-right: 3px;
+    font-size: 14px;
+    color: #5f5f5f;
+}
+.navbarFavDiv:hover{
+    .navbarFav{
+        color: #00798A;
+    }
+}
+.navBarLinks{
+    text-decoration: none;
+    color: #5f5f5f;
+    margin: 5px;  
+    font-weight: 500;  
+    font-size: 16px;
+}
+.navBarLinks:hover{
+    color: #00798A;
+}
+
+.navBarLeft{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.navbarLogo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+}
+.navbarLogoSpan{
+    color:#014d57;
+    font-weight: 500;
+    font-family: "Damion" , sans-serif;
+    font-size: 28px;
+    cursor: pointer;
+}
+.navbarLogOut{
+    font-size: 18px;
+}
+
+
+
+/* SearchBar */
+
+.searchBarDiv{
+    border: 1px solid #5f5f5f;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.searchBarDiv:hover{
+    border: 1.5px solid #00798A;
+    .searchBarIcon{
+        color: #00798A;
+    }
+}
+.searchBarInput{
+    width: 500px;
+    height: 20px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin: 5px;
+    color: black;
+    font-weight: 500;   
+}
+.searchBarIcon{
+    font-size: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-top: 2px;
+    color: #5f5f5f;
+}
+
+/* HomePage */
+
+.homeSloganDiv{
+    padding-left: 5px;
+    max-width: 600px;
+}
+.homeSlogan{
+    font-weight: 400;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    opacity: 0;
+    cursor: pointer;
+}
+.homeSlogan:hover{
+    color: #2a2a2a;
+}
+
+.homeLocationDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 400px;
+}
+.homeLocationIcon{
+    font-size: 16px;
+    padding:3px;
+    color: #026471;
+}
+
+.homeLocationSpan{
+    font-weight: 500;
+    color: #00798A;
+    padding: 2px;
+}
+.homeLocationButton{
+    display: flex;
+    padding: 5px;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #F2F9F9;
+    cursor:pointer;
+}
+.homeLocationButton:hover{
+    .homeLocationSpan{
+        color: #025965;
+    }
+    .homeLocationIcon{
+        color: #014d57;;
+    }
+}
+.homeCatDiv{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+}
+.homeCatSliderDiv{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.homeCatHeader{
+    text-decoration: none;
+    color: #000000;
+    font-size: 24px;
+    font-weight: 500;
+    font-style: italic;
+}
+.homeCatHeader:hover{
+    color: #00798A;
+}
+.catSliderSpan{
+    font-size: 14px;
+    color: #5f5f5f;
+}
+.catSliderSpanDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.catSliderSpanDiv:hover{
+    .catSliderSpan{
+        color: #014d57;
+    }
+    .catSliderIcon{
+        color: #014d57;
+    }
+}
+.catSliderIcon{
+    font-size: 16px;
+    color: #5f5f5f;
+}
+
+
+/* Footer */
+
+.footerDiv{
+    display: flex;
+    width: 100%;
+    height: 300px;
+    background-color: #212121;
+    color: #ffffff;
+}
+
+/* LoginPage */
+
+.loginPage{
+    background-color:#fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 10px;
+}
+
+.loginDiv{
+    padding: 20px;
+    min-height: 600px;
+    border:none;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.loginSlogan{
+    margin-left: 1.2rem;
+    color:#014d57;
+    font-weight: 500;
+    /* font-style: italic; */
+    font-family: "Damion" , sans-serif;
+    font-size: 40px;    
+    opacity: 1;
+    cursor: pointer;
+}
+.loginSloganDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+.logoDiv{
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.loginLogo{
+    width: 40px;
+    height: 40px;
+    background-image: url("../../images/mHarfi.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Login */
+
+.loginComDiv{
+    padding: 10px;
+    font-weight: 500;
+}
+
+.emailDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+.passwordDiv{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    font-size: 16px;
+}
+.registerInputDiv{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+.loginInput{
+    border: 1px solid lightgray;
+    height: 32px;
+    padding-left: 10px;
+    border-radius: 8px;
+    outline : none;
+    cursor : text;
+    font-size: 14px;
+    line-height: 20px;
+    width: 240px;
+}
+.loginButton{
+    margin-top: 1rem;
+    text-decoration: none;
+    width: 100%;
+    background-color: #00798A;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;    
+    font-weight: 500;
+    font-family: "Funnel Display" , sans-serif;
+    height: 32px;
+    border-radius: 8px;
+    color: #ffffff;
+}
+.loginButton:hover{
+    background-color: #028b9d;
+}
+.loginButtonDiv{
+    display: flex;
+    align-items: center;
+    padding:  0 0 20 20px;
+}
+.loginLinksDiv{
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.loginLinks{
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+}
+.loginLinks:hover{
+    color: #015c68;
+}
+
+.loginHrDiv{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+.loginHr{
+    width: 45%;
+    border: none;
+    border-top: 1px solid #2a2a2a;
+}
+.registerError{
+    color: #e64e41;
+    font-size: 12px;
+    line-height: 14px;
+    max-width: 250px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+   }
+.serverAlert{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    background-color: #f9d6d3;
+    padding: 6px;
+    font-size: 14px;
+    color: #000000;
+    border-radius: 6px;
+    line-height: 18px;
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+
+@media screen and (max-width:480px){
+    .loginInput{
+        width: 120px;
+        font-size: 12px;
+        line-height: 0px;
+    }
+    .loginLabels{
+        width: 120px;
+    }
+    .loginLogo{
+        display: none;
+    }
+}
+
+@media screen and (max-width:600px){
+    .loginInput{
+        width: 160px;
+        font-size: 12px;
+        line-height: 0px;
+    }
+    .loginLogo{
+        display: none;
+    }
+}
+
+@media screen and (max-width:750px){
+    .searchBarInput{
+        width: 80px;
+    }
+}
+
+@media screen and (max-width:1000px){
+    .searchBarInput{
+        width: 250px;
+    }
+}
+
+
+
+
+/* Swiper Slider */
+
+
+.homeSloganSlider {
+    width: 680px;
+    height: 280px;
+}
+
+.homeCatSlider{
+    width: 100%;
+    height: 80px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sliderImg{
+    border-radius: 12px;
+}
+
+
+.swiper-button-prev-custom,.swiper-button-next-custom{
+    border: none;
+    height: 30px;
+    cursor: pointer;
+    color: #00798A;
+}

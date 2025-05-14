@@ -1,0 +1,49 @@
+## Build sonuçları
+bin/
+obj/
+
+## .NET paketleri
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.assets.json
+
+## User-specific dosyalar
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider ve VS Code gibi IDE dosyaları
+.vscode/
+.idea/
+
+## Visual Studio çalışma dosyaları
+*.vspscc
+*.vssscc
+.vs/
+
+## Test sonuçları
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+## Logs
+*.log
+
+## Temporary files
+~$*
+*.tmp
+*.bak
+
+## DotCover
+*.dotCover
+
+
+## ASP.NET secrets
+secrets.json
+*.db
+*.sqlite
+appsettings.Development.json
