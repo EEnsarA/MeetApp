@@ -7,15 +7,20 @@ import NavBar from '../components/NavBar';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from "react-router-dom"
 import HomeImgSlider from '../components/HomeImgSlider';
 import HomeCatSlider from '../components/HomeCatSlider';
 import { useDispatch, useSelector } from 'react-redux';
+import EventCard from '../components/EventCard';
+import { createTheme, ThemeProvider } from "@mui/material";
+import Banner from '../components/Banner';
+import { getAllEvents } from '../redux/eventSlice';
+import { customContainer } from '../helpers/customWidgets';
 
 function HomePage() {
 
+  const dispatch = useDispatch();
+  const { events, event, loading, errMessage } = useSelector((store) => store.eventList);
 
   const [currentUser, setCurrentUser] = useState({});
 
@@ -29,7 +34,13 @@ function HomePage() {
       }
       setCurrentUser(parsedUser);
     }
+
+    dispatch(getAllEvents());
   }, [])
+  useEffect(() => {
+    console.log(events);
+  }, [events])
+
 
 
   useGSAP(() => {
@@ -43,42 +54,72 @@ function HomePage() {
     })
   })
 
+  const today = new Date();
+
+  const nearEvents = events.filter(e => {
+    const eventDate = new Date(e.startDate);
+    const diffTime = eventDate - today;            // milisaniye cinsinden hesaplar !
+    const diffDays = diffTime / (1000 * 60 * 60 * 24);  // 1000ms = 1s yani 1 gün  = 1000*60*60*24 ms dir !
+    return diffDays >= 0 && diffDays <= 30
+  })
+
+
 
   return (
     <>
       <NavBar />
-      <Container maxWidth="xl">
-        <div style={{ marginTop: "2rem", padding: "10px", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-          <div className='homeSloganDiv'>
-            {currentUser.role == "Admin" ?
-              <span className='homeSlogan' id='homeSlogan'>
-                Hoşgeldin Admin !
-              </span>
-              :
-              <span className='homeSlogan' id='homeSlogan'>
-                Hoşgeldin {currentUser.fullName} !
-              </span>
-            }
+      <ThemeProvider theme={customContainer}>
+        <Container maxWidth="xl">
+          <div style={{ marginTop: "2rem", padding: "10px", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+            <div className='homeSloganDiv'>
+              {currentUser.role == "Admin" ?
+                <span className='homeSlogan' id='homeSlogan'>
+                  Hoşgeldin Admin !
+                </span>
+                :
+                <span className='homeSlogan' id='homeSlogan'>
+                  Hoşgeldin {currentUser.fullName} !
+                </span>
+              }
 
+            </div>
+            <HomeImgSlider />
           </div>
-          <HomeImgSlider />
-        </div>
-        <div className='homeCatDiv'>
-          <div className='homeCatHeaderDiv'>
+          <div className='homeCatDiv'>
+            <div className='homeCatHeaderDiv'>
+              <Link className='homeCatHeader'>
+                <span>Tüm Etkinlikler</span>
+              </Link>
+            </div>
+            <div>
+              <HomeCatSlider />
+            </div>
+          </div>
+          <div className='homeEventsDiv'>
             <Link className='homeCatHeader'>
-              <span>Tüm Etkinlikler</span>
+              <span>Yakın Tarihteki Etkinlikler</span>
             </Link>
+            <div className='homeEventCardsDiv'>
+              {nearEvents?.map((e) =>
+                <EventCard events={e} key={e.id} />
+              )}
+            </div>
           </div>
-          <div>
-            <HomeCatSlider />
+          <div className='homeBannerDiv'>
+            <Banner />
           </div>
-        </div>
-        <div className='homeEventsDiv'>
-          <Link className='homeCatHeader'>
-            <span>Yakınlardaki Etkinlikler</span>
-          </Link>
-        </div>
-      </Container>
+          <div className='homeEventsDiv'>
+            <Link className='homeCatHeader'>
+              <span>Sevebileceğiniz Etkinlikler</span>
+            </Link>
+            <div className='homeEventCardsDiv'>
+              {events?.map((e) =>
+                <EventCard events={e} key={e.id} />
+              )}
+            </div>
+          </div>
+        </Container>
+      </ThemeProvider>
     </>
 
   )

@@ -52,6 +52,10 @@ namespace MeetAppApi.Context
             // -- Seed Data
 
             modelBuilder.Entity<User>().HasData(SeedData.CreateUser());
+            modelBuilder.Entity<Category>().HasData(SeedData.CreateCategory());
+            modelBuilder.Entity<Event>().HasData(SeedData.createEvent());
+            modelBuilder.Entity<EventCategory>().HasData(SeedData.matchCategories());
+
 
 
         }   
@@ -62,6 +66,10 @@ namespace MeetAppApi.Context
         public DbSet<Event> Events { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<CartEvent> CartEvents { get; set; }
+
+        public DbSet<EventCategory> EventCategories { get; set; }
 
         public DbSet<Cart> Carts { get; set; }
 

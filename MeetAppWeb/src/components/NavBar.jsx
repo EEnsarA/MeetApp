@@ -14,6 +14,9 @@ import { IoMdSettings } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/authSlice';
+import { createTheme, ThemeProvider } from "@mui/material";
+import Container from '@mui/material/Container';
+import { customContainer } from '../helpers/customWidgets';
 
 function NavBar() {
 
@@ -61,88 +64,94 @@ function NavBar() {
     return (
 
         <div className='navBar'>
-            <Grid container spacing={0} height={40} sx={{ alignItems: "center" }}>
-                <Grid size={{ xs: 12, sm: 6, md: 8, lg: 8 }}>
-                    <div className='navBarLeft'>
-                        <div className='navbarLogo'>
-                            <span className='navbarLogoSpan'>MeetApp</span>
-                        </div>
-                        {address &&
-                            <div className='homeLocationDiv'>
-                                <div className='homeLocationButton'>
-                                    <FaLocationDot className='homeLocationIcon' />
-                                    <span className='homeLocationSpan'>{address.locality} / {address.countryCode}</span>
+            <ThemeProvider theme={customContainer}>
+                <Container maxWidth="xl" style={{ height: "40px" }}>
+                    <Grid container spacing={0} sx={{ alignItems: "center" }}>
+                        <Grid size={{ xs: 12, sm: 6, md: 8, lg: 8 }}>
+                            <div className='navBarLeft'>
+                                <Link to={"/home"} style={{ textDecoration: "none" }}>
+                                    <div className='navbarLogo'>
+                                        <img src="/images/logo97.png" alt="" width={128} height={64} />
+                                    </div>
+                                </Link>
+                                {address &&
+                                    <div className='homeLocationDiv'>
+                                        <div className='homeLocationButton'>
+                                            <FaLocationDot className='homeLocationIcon' />
+                                            <span className='homeLocationSpan'>{address.locality} / {address.countryCode}</span>
+                                        </div>
+                                    </div>
+                                }
+                                <div className='searchBarDiv'>
+                                    <input className="searchBarInput" type="text" placeholder='Etkinlik arayın..' />
+                                    <Link><IoSearch className='searchBarIcon' /></Link>
                                 </div>
                             </div>
-                        }
-                        <div className='searchBarDiv'>
-                            <input className="searchBarInput" type="text" placeholder='Etkinlik arayın..' />
-                            <Link><IoSearch className='searchBarIcon' /></Link>
-                        </div>
-                    </div>
-                </Grid>
-                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4 }}>
-                    <div className='navBarRight'>
-                        {currentUser.role == "User" ?
-                            <>
-                                <Link className='navBarLinks'>
-                                    <div className='navbarCartDiv'>
-                                        <FaShoppingCart className='navbarCart' />
-                                        <span>Sepetim</span>
-                                    </div>
-                                </Link>
+                        </Grid>
+                        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4 }}>
+                            <div className='navBarRight'>
+                                {currentUser.role == "User" ?
+                                    <>
+                                        <Link className='navBarLinks'>
+                                            <div className='navbarCartDiv'>
+                                                <FaShoppingCart className='navbarCart' />
+                                                <span>Sepetim</span>
+                                            </div>
+                                        </Link>
 
-                                <Link className='navBarLinks'>
-                                    <div className='navbarFavDiv'>
-                                        <FaHeart className='navbarFav' />
-                                        <span>Etkinliklerim</span>
-                                    </div>
-                                </Link>
+                                        <Link className='navBarLinks'>
+                                            <div className='navbarFavDiv'>
+                                                <FaHeart className='navbarFav' />
+                                                <span>Etkinliklerim</span>
+                                            </div>
+                                        </Link>
 
-                                <Link className='navBarLinks'>
-                                    <div className='navbarProfileDiv'>
-                                        <IoPersonCircle className='navbarProfile' />
-                                        <span>Profil</span>
-                                    </div>
-                                </Link>
+                                        <Link className='navBarLinks'>
+                                            <div className='navbarProfileDiv'>
+                                                <IoPersonCircle className='navbarProfile' />
+                                                <span>Profil</span>
+                                            </div>
+                                        </Link>
 
-                                <Link className='navBarLinks' onClick={exit}>
-                                    <div className='navbarLogOutDiv'>
-                                        <FiLogOut className='navbarLogOut' />
-                                    </div>
-                                </Link>
-                            </>
-                            :
-                            <>
-                                <Link className='navBarLinks'>
-                                    <div className='navbarProfileDiv'>
-                                        <FaUsers className='navbarProfile' />
-                                        <span>Kullanıcılar</span>
-                                    </div>
-                                </Link>
-                                <Link className='navBarLinks'>
-                                    <div className='navbarFavDiv'>
-                                        <IoMdSettings className='navbarFav' />
-                                        <span>Etkinlikler</span>
-                                    </div>
-                                </Link>
-                                <Link className='navBarLinks'>
-                                    <div className='navbarProfileDiv'>
-                                        <IoPersonCircle className='navbarProfile' />
-                                        <span>Admin</span>
-                                    </div>
-                                </Link>
+                                        <Link className='navBarLinks' onClick={exit}>
+                                            <div className='navbarLogOutDiv'>
+                                                <FiLogOut className='navbarLogOut' />
+                                            </div>
+                                        </Link>
+                                    </>
+                                    :
+                                    <>
+                                        <Link className='navBarLinks'>
+                                            <div className='navbarProfileDiv'>
+                                                <FaUsers className='navbarProfile' />
+                                                <span>Kullanıcılar</span>
+                                            </div>
+                                        </Link>
+                                        <Link className='navBarLinks'>
+                                            <div className='navbarFavDiv'>
+                                                <IoMdSettings className='navbarFav' />
+                                                <span>Etkinlikler</span>
+                                            </div>
+                                        </Link>
+                                        <Link className='navBarLinks'>
+                                            <div className='navbarProfileDiv'>
+                                                <IoPersonCircle className='navbarProfile' />
+                                                <span>Admin</span>
+                                            </div>
+                                        </Link>
 
-                                <Link className='navBarLinks' onClick={exit}>
-                                    <div className='navbarLogOutDiv'>
-                                        <FiLogOut className='navbarLogOut' />
-                                    </div>
-                                </Link>
-                            </>
-                        }
-                    </div>
-                </Grid>
-            </Grid>
+                                        <Link className='navBarLinks' onClick={exit}>
+                                            <div className='navbarLogOutDiv'>
+                                                <FiLogOut className='navbarLogOut' />
+                                            </div>
+                                        </Link>
+                                    </>
+                                }
+                            </div>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </ThemeProvider>
         </div>
 
 

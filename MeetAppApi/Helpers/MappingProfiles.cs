@@ -13,6 +13,10 @@ namespace MeetAppApi.Helpers
             CreateMap<UserListDto,User>();
             CreateMap<User,RegisterDto>();
             CreateMap<RegisterDto, User>();
+            CreateMap<Event,EventDto>();
+            CreateMap<EventDto, Event>();
+            CreateMap<Category,CategoryDto>();
+            CreateMap<CategoryDto, Category>(); 
 
         }    
     }
