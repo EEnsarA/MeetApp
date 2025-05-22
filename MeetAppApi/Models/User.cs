@@ -31,7 +31,7 @@
         public Role Role { get; set; } = Role.User;
 
         // Navigation Properties
-        public Cart ?Cart { get; set; } 
+        public Cart Cart { get; set; } = default!;
 
 
     }

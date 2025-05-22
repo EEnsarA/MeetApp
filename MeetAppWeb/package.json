@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.7.0",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.6",
+    "dayjs": "^1.11.13",
     "formik": "^2.4.6",
     "gsap": "^3.12.7",
     "jwt-decode": "^4.0.0",

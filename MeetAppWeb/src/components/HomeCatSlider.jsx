@@ -36,7 +36,7 @@ function HomeCatSlider() {
     dispatch(getAllCategories());
   }, [])
   useEffect(() => {
-    console.log(categories);
+
   }, [categories])
 
   const categoryIcons = {

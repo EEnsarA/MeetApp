@@ -40,7 +40,7 @@
 }
 .navbarCart{
     margin-right: 5px;
-    font-size: 16px;
+    font-size: 20px;
     color: #5f5f5f;
 }
 .navbarCartDiv:hover{
@@ -55,7 +55,7 @@
 }
 .navbarProfile{
     margin-right: 2px;
-    font-size: 18px;
+    font-size: 20px;
     color: #5f5f5f;
 }
 .navbarProfileDiv:hover{
@@ -71,7 +71,7 @@
 }
 .navbarFav{
     margin-right: 3px;
-    font-size: 14px;
+    font-size: 18px;
     color: #5f5f5f;
 }
 .navbarFavDiv:hover{
@@ -79,12 +79,14 @@
         color: #00798A;
     }
 }
+
 .navBarLinks{
     text-decoration: none;
     color: #5f5f5f;
     margin: 5px;  
+    margin-right: 5px;
     font-weight: 500;  
-    font-size: 16px;
+    font-size: 18px;
 }
 .navBarLinks:hover{
     color: #00798A;
@@ -120,7 +122,7 @@
 
 .searchBarDiv{
     border: 1px solid #5f5f5f;
-    border-radius: 10px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -140,7 +142,9 @@
     background-color: transparent;
     margin: 5px;
     color: black;
-    font-weight: 500;   
+    font-weight: 500; 
+    font-family: "Funnel Display",sans-serif; 
+    font-size: 16px; 
 }
 .searchBarIcon{
     font-size: 20px;
@@ -520,12 +524,102 @@
 }   
 
 
+/* Event Detail */
+.eventDetailMainDiv{
+    display: flex;
+    justify-content: center;
+}
+.eventDetailDiv{
+    width: fit-content;
+    padding: 2rem;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.eventDetailEventName{
+    font-size: 30px;
+    font-weight: 500;
+    font-family: "Funnel Display",sans-serif;
+}
+.eventDetailLocationDiv{
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+.eventDetailLocationSpan{
+    margin-left: 4px;
+    margin-right: 1rem;
+    font-size: 14px;
+    font-family: "Funnel Display",sans-serif;
+}
+.eventDetailDateSpanHead{
+    margin-left: 4px;
+    font-size: 14px;
+    font-family: "Funnel Display",sans-serif;
+}
+.eventDetailImageDiv{
+    max-width: fit-content;
+    height: 360px;
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+.eventDetailImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+.eventDetailDescDiv{
+    max-width: 1250px;
+    margin-top: 1rem;
+}
+.eventDetailDescHeader{
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    font-family: "Funnel Display",sans-serif;
+}
+.eventDetailDescSpan{
+    font-size: 16px;
+    font-family: "Funnel Display" , sans-serif;
+    line-height: 2rem;
+    color: #2a2a2a;
+}
+.eventDetailDateDiv{
+    display: flex;
+    flex-direction: column;
+    max-width: 1250px;
+    margin-top: 1rem;
+}
+.eventDetailDateSpan{
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.eventDetailRuleDiv{
+    max-width: 1250px;
+    margin-top: 1rem;
+}
+.eventDetailRuleHeader{
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+.eventDetailRule{
+    font-size: 16px;
+    font-family: "Funnel Display" , sans-serif;
+    line-height: 2rem;
+    color: #2a2a2a;
+}
+
 /* Ticket */
 .ticketMainDiv{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    max-width: 600px;
+    min-width: 600px;
     height: 60px;
     border: 1px solid lightgray;
     border-radius: 8px;
@@ -596,6 +690,15 @@
     margin-left: 1rem;
     color:#5f5f5f;
 }
+.addCartDiv{
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 8px;
+}
 
 
 /* EventPage eventsByCat*/
@@ -607,10 +710,198 @@
     align-items: center;
     justify-content: flex-start;
 }
+.selectMainDiv{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    justify-content: space-between;
+}
+.selectMiddleDiv{
+    display: flex;
+    flex-direction: row;
+}
+.selectInnerDiv{
+    margin-left: 2rem;
+}
 
+/* CartPage */
 
+.cartMainDiv{
+    display: flex;
+    justify-content: center;
+}
+.cartMainDetailDiv{
+    width: 2500px;
+    min-height: 900px;
+    padding: 2rem;
+    margin-top: 5rem;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
 
+.cartHeaderDiv{
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.cartHeader{
+    font-family: "Funnel Display",sans-serif;
+    color: #212121;
+    font-size: 30px;
+    font-weight: 500;   
+}
+.cartHeaderIcon{
+    font-size: 20px;
+    margin-right: 5px;
+    margin-top: 5px;;
+   
+}
+.cartEventLengthSpan{
+   font-family: "Funnel Display",sans-serif;
+   font-size: 14px;
+    margin-top: 8px;
+    margin-left: 8px;
+     color: #5f5f5f;
+}
+.cartEventDiv{
+    max-width: 980px;
+    position: relative;
+    color: #212121;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.cartEventDiv:hover{
+    box-shadow: rgba(14, 100, 137, 0.341) 0px 4px 6px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.cartEventImageDiv{
+    width: 300px;
+    height: 150px;
+    border-radius: 12px;
+}
+.cartEventInfoDiv{
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+.cartEventLocationDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1rem;
+}
+.cartLocationSpan{
+    margin-left: 6px;
+    margin-right: 2rem;
+    font-size: 16px;
+    font-family: "Funnel Display" , sans-serif;
+}
+.cartDateSpan{
+    margin-left: 6px;
+    font-size: 16px;
+    font-family: "Funnel Display" , sans-serif;
+}
 
+.cartEventName{
+    font-size: 24px;
+    font-family: "Funnel Display" , sans-serif;
+    font-weight: 400;
+}
+
+.cartEventPayHeaderDiv{
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end; 
+}
+.cartEventPayHeader{
+    font-size: 24px;
+    font-family: "Funnel Display" , sans-serif;
+    font-weight: 500;  
+}
+.cartEventPriceDiv{
+    margin-top: 2rem;
+    display: flex;
+    align-items: flex-start;
+}
+.cartEventPriceSpan{
+    margin-left: 8px;
+    font-size: 20px;
+    font-family: "Funnel Display" , sans-serif;
+    font-weight: 600;  
+}
+.cartEventPriceText{
+    font-size: 20px;
+    font-family: "Funnel Display" , sans-serif;
+    font-weight: 600;  
+}
+.cartEventDeleteButton{
+    text-decoration: none;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 7px;
+    cursor: pointer;
+}
+.deleteButton{
+    font-size: 24px;
+    color: #212121;
+}
+.cartEventDeleteButton:hover{
+    .deleteButton{
+        color: #b23024;
+    }
+}
+.cartEventPayMainDiv{
+    color: #212121;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-width: 400px;
+    height: 420px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 4px;
+}
+.cartEventPayUpDiv{
+    position: absolute;
+    border-radius: 4px;
+    margin: 0;
+    top: 0;
+    width: 100%;
+    height: 25px;
+    /* background: linear-gradient(98.6deg, #026CDF -23.51%, #7F6BF4 86.87%); */
+    background: linear-gradient(98.6deg, #014d57 -23.51%, #038495 86.87%);
+}
+.cartEventPayUpDotDiv{
+    top: 0;
+    position: absolute;
+    border-bottom: 10px dotted #ffffff;
+    width: 100%;
+    height: 20px;
+}
+.cartEventBuyButton{
+    margin-top: 5rem;
+    text-decoration: none;
+    width: 100%;
+    background-color: #00798A;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;    
+    font-weight: 500;
+    font-family: "Funnel Display" , sans-serif;
+    height: 38px;
+    border-radius: 6px;
+    color: #ffffff;
+}
+.cartEventBuyButton:hover{
+    background-color: #028b9d;
+}
 
 
 /* Responsive */

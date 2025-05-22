@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetAppApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250517132737_mig_1")]
+    [Migration("20250520181107_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -42,6 +42,18 @@ namespace MeetAppApi.Migrations
                         .IsUnique();
 
                     b.ToTable("Carts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("MeetAppApi.Models.CartEvent", b =>
@@ -68,6 +80,55 @@ namespace MeetAppApi.Migrations
                     b.HasIndex("EventId");
 
                     b.ToTable("CartEvents");
+                });
+
+            modelBuilder.Entity("MeetAppApi.Models.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("CartItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CartId = 1,
+                            Count = 1,
+                            EventId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CartId = 1,
+                            Count = 1,
+                            EventId = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CartId = 2,
+                            Count = 1,
+                            EventId = 6
+                        });
                 });
 
             modelBuilder.Entity("MeetAppApi.Models.Category", b =>
@@ -252,7 +313,7 @@ namespace MeetAppApi.Migrations
                             Location = "Alemdar Cad. No:5 Sultanahmet Fatih İstanbul (Yerebatan Sarnıcı yanı) FATİH/İstanbul",
                             NumberOfTickets = 14000,
                             Rules = "- Gösteri başlamadan 15 dakika önce salona gelin. Gösteri başladıktan sonra geç gelen izleyiciler alınmayacaktır.\r\n                - Gösteri sırasında telefonları sessize alın veya kapatın. Işıklar veya sesler, hem oyuncuları hem de diğer izleyicileri rahatsız edebilir.\r\n                - Gösteri sırasında fotoğraf veya video çekimi yapmak yasaktır. Etkinlik sonrası fotoğraf alanlarında fotoğraf çekebilirsiniz.\r\n                - Gösteri boyunca dikkatlice izleyin ve sessiz olun. Anlatıcı ve oyuncuların performansını bölmemek için odaklanın.\r\n                - Gösteri sırasında salon içinde yiyecek ve içecek tüketimi yasaktır. \r\n                - Acil bir durumda güvenlik görevlilerinin talimatlarına uyun. Çıkış yollarını önceden öğrenin.\r\n                - Gösteri, 12 yaş ve üzeri izleyiciler için uygundur. Yüksek ses ve ışık olduğundan küçük çocuklar için etkinlik uygun olmayabilir.\r\n                - Saygılı ve olumlu bir tutum sergileyin. Rahatsız edici davranışlar gösteren izleyiciler salondan çıkarılabilir. Etkinlik sahibi ve güvenlik görevlileri izleyiciyi oyundan çıkarma hakkına sahiptir.\r\n                - Etkinliğe katılım için geçerli biletinizi temin edin. Online veya gişeden bilet alabilirsiniz.\r\n                - Engelli izleyiciler için özel erişim ve yerler bulunmaktadır. Detaylı bilgi için etkinlik öncesi bizimle iletişime geçebilirsiniz. Arka otopark tarafında engelli girişi ve wc bulunmaktadır.",
-                            StartDate = new DateTime(2025, 5, 18, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2025, 5, 27, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             TicketPrice = 1250.0
                         },
                         new
@@ -278,7 +339,7 @@ namespace MeetAppApi.Migrations
                             City = "Samsun",
                             Country = "Türkiye",
                             EndDate = new DateTime(2025, 5, 31, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDescription = "Ankara Çocuk Sirki çocuklara yönelik sirk gösterimidir, orijinal sirk figürleri ile eğlenceye her an kapılıp heyecanla izlemeye devam edeceğiniz, zaman zaman şaşkınlık ile süsleyeceğiniz duygu karmaşası ile hayran kalacağınız bir etkinliktir. \r\n                Sirk içerisinde;\r\n                SİHİRBAZ SHOW \r\n                TAHTA BACAK\r\n                JONGLÖR SHOW \r\n                BUBBLE SHOW \r\n                PALYAÇO SHOW, gibi birçok eğlenceli aktiviteler bulunmaktadır. \r\n                Sizler de yerinizi ayırmayı ve ANKARA ÇOCUK SİRKİ için unutulmaz sahne gösterilerinde hatıralar biriktirmeyi unutmayın. \r\n                2-12 Yaş arası için uygundur. \r\n                Süre: 45 Dk.",
+                            EventDescription = "Ankara Çocuk Sirki çocuklara yönelik sirk gösterimidir, orijinal sirk figürleri ile eğlenceye her an kapılıp heyecanla izlemeye devam edeceğiniz, zaman zaman şaşkınlık ile süsleyeceğiniz duygu karmaşası ile hayran kalacağınız bir etkinliktir. \r\n                Sirk içerisinde;\r\n                SİHİRBAZ SHOW \r\n                TAHTA BACAK\r\n                JONGLÖR SHOW \r\n                BUBBLE SHOW \r\n                PALYAÇO SHOW, gibi birçok eğlenceli aktiviteler bulunmaktadır. \r\n                Sizler de yerinizi ayırmayı ve ANKARA ÇOCUK SİRKİ için unutulmaz sahne gösterilerinde hatıralar biriktirmeyi unutmayın. \r\n                2,12 Yaş arası için uygundur. \r\n                Süre: 45 Dk.",
                             EventName = "Ankara Çocuk Sirki",
                             ImageUrl = "/uploads/cocuk_sirki.png",
                             IsOnBanner = true,
@@ -373,6 +434,125 @@ namespace MeetAppApi.Migrations
                             Rules = "- Workshop çalışmaları (çocuk workshopları hariç) 18 yaş ve üzeri katılımcılara yöneliktir.\r\n                - Programlarımız, en az 4 kişinin katılımıyla gerçekleşmektedir.\r\n                - Biletler tek kişiliktir ve her istasyonda sadece bir kişi çalışabilir.\r\n                - Biletlerde iade ya da değişiklik kesinlikle yapılmamaktadır.\r\n                - Workshop başlamadan önce bilet ve katılımcı isim/bilet/yaş kontrolü yapılmaktadır.\r\n                - Tüm workshoplarda dijital isme özel “Eataly Workshop Katılım Sertifikası” verilmektedir.\r\n                - Eataly gerekli gördüğü durumlarda, katılımcıların ödemiş olduğu etkinlik ücretini iade ederek organizasyonu iptal etmek hakkını saklı tutar.\r\n                - Eataly gerekli gördüğü durumda etkinliklerde içerik ve tarih değişimi yapma hakkını saklı tutar.\r\n                - Workshop boyunca yapacağınız yemeklerin fazlasının gıda atığı olmaması adına, saklama kaplarınızı yanınızda getirerek evinize götürebilir, böylece aynı zamanda sevdiklerinizle de paylaşabilirsiniz.\r\n                - Eataly’de düzenlenen workshoplar “profesyonel eğitim” kapsamına girmemektedir. Workshoplar, hobi ve eğlence amaçlı olup; etkinliğin türüne göre farklı teorik bilgiler workshop şefi tarafından anlatılabilmektedir.",
                             StartDate = new DateTime(2025, 5, 29, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             TicketPrice = 3300.0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            City = "Edirne",
+                            Country = "Türkiye",
+                            EndDate = new DateTime(2025, 7, 31, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventDescription = "Trakya Müzik Festivali, 31 Temmuz/1-2-3 Ağustos tarihlerinde sizleri bekliyor!\r\n                Türkiye’nin en büyük müzik festivallerinden biri olan Trakya Müzik Festivali, her yıl binlerce müzikseveri Saros Körfezi’nin benzersiz doğasında bir araya getiriyor.\r\n                Denizin hemen yanı başında, eşsiz gün batımları eşliğinde günler süren müzik ve eğlence, festival ruhunu en üst seviyede yaşatıyor. Alternatif, rock, pop ve elektronik müzik sahnesinin en sevilen isimlerinin performanslarıyla dolu bu unutulmaz etkinlik, katılımcılara sadece müzik değil; doğayla iç içe, özgür ve sınırsız bir festival deneyimi sunuyor. Kamp alanında konaklayarak yıldızların altında uyanabilir, denizin tadını çıkarabilir ve gün boyu süren etkinliklerle festivalin enerjisine kendini bırakabilirsin.\r\n                Her yıl daha da büyüyen Trakya Müzik Festivali, müzik, doğa ve eğlenceyi bir arada yaşamak isteyenler için yılın en özel etkinliklerinden biri olmaya devam ediyor.",
+                            EventName = "Trakya Müzik Festivali 2025",
+                            ImageUrl = "/uploads/trakya_müzik_fest.jpg",
+                            IsOnBanner = false,
+                            IsOnSale = true,
+                            Location = "Soroz Körfezi/KEŞAN/Edirne",
+                            NumberOfTickets = 2500,
+                            Rules = "- Kapı açılış saati 14:00\r\n                - 18 yaş sınırı yoktur, 18 yaş altındaki katılımcılara farklı renkte bileklik takılacaktır.\r\n                - Festival biletlerinin iade edilmesi veya festival biletlerinde değişiklik yapılması mümkün değildir.\r\n                - Festival biletinin kaybolması veya çalınması, alıcı sorumluluğundadır. Çalınan ya da kaybolan biletin yenisiyle değiştirilmesi veya para iadesi mümkün değildir.\r\n                - Festival alanına profesyonel ses ve görüntü kaydı yapan cihazlar, içecekler, cam, plastik şişe, teneke, havai fişek, yanıcı parlayıcı her türlü nesne (parfüm, böcek ilacı vb.), silah veya keskin nesneler getirmek yasaktır. Ayrıca yanınızda getirmeyi planladığınız katlanabilir sandalye ya da şemsiyeler güvenlik tarafından içeri alınmayabilir. \r\n                - Festival biletini satın alanlar, festival konserlerinin görüntü ve/veya ses kaydından alıntı yapamaz, bu konserlerin ve sanatçıların görüntülerini içeren görsel ve/veya işitsel kayıtları kaydedemez, ses ve görüntü taşıyıcılara ve/veya fonogramlara kayıt ederek çoğaltamaz ve yayımlayamaz ve umuma dağıtamaz, TV kanallarında, internet mecrasında ve GSM operatörleri kanalıyla yayınlanamaz.\r\n                - Festival alanında ateş yakmak kesinlikle yasaktır.",
+                            StartDate = new DateTime(2025, 7, 31, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            TicketPrice = 1200.0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            City = "Eskişehir",
+                            Country = "Türkiye",
+                            EndDate = new DateTime(2025, 5, 27, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            EventDescription = "Türkiye, Avrupa ve Amerika’da ve dünyanın farklı şehirlerinde gerçekleştirdiği tek kişilik gösterisinde kendi yaşamından ve bu topraklarda güldürü niteliği taşıyan her olaydan beslenen Doğu Demirkol, bu sezon da seyircisi ile buluşmaya devam ediyor.",
+                            EventName = "Doğu Demirkol",
+                            ImageUrl = "/uploads/doğu_demirkol_standup.jpg",
+                            IsOnBanner = true,
+                            IsOnSale = true,
+                            Location = "Eskişehir Atatürk Kültür Sanat ve Kongre Merkezi, Eskişehir",
+                            NumberOfTickets = 920,
+                            Rules = "- Etkinlik girişinde bilet kontrolü yapılacaktır, biletinizi telefondan göstermeniz gerekmektedir.\r\n                - 8 yaşından küçük çocuklar etkinliğe alınmamaktadır. 8 yaş ve üzeri bilete tabidir.\r\n                - Dışardan yiyecek ve içecek alınmayacaktır.\r\n                - Organizasyon şirketinin programda ve bilet fiyatlarında değişiklik yapma hakkı saklıdır.\r\n                - Organizasyon firması, diğer misafirleri rahatsız eden/edecek nitelikte, uygun görmediği kişileri etkinlik için bilet bedelini iade etmek koşuluyla, etkinlik mekanına kişiyi almama hakkına sahiptir.\r\n                - Etkinlik mekanına kamera, fotoğraf makinası, ses cihazı vb. alınmayacaktır.\r\n                - Satın alınan biletlerde iptal, iade ve değişiklik yapılmamaktadır.\r\n                - Etkinlik boyunca ses ve görüntü kaydı yapılacaktır. Organizatör ve sanatçı daha sonra bu görüntüleri katılımcılardan herhangi bir onay almaksızın kullanma hakkına sahiptir.- Etkinlik alanına giriş yapan katılımcıların alandan çıkış yapmaları halinde yeni bilet satın almaları gerekmektedir.\r\n                - Etkinlik alanına ateşli silahlar, yanıcı, patlayıcı, parlayıcı (*deodorant, *sprey, *parfüm,  vb. gibi), kesici, delici, bereleyici, saldırı ve savunma amacıyla olmasa bile fiilen saldırı ve savunmada kullanılmaya elverişli (*kask, *kamp sandalyesi, *selfie çubuğu, *tripod, *pantolon zinciri vb.) her türlü alet ve lazer imleci ile girmek yasaktır.",
+                            StartDate = new DateTime(2025, 5, 27, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            TicketPrice = 1250.0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            City = "İstanbul",
+                            Country = "Türkiye",
+                            EndDate = new DateTime(2025, 5, 31, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventDescription = "İstanbul Diyalog Müzesi, yepyeni bir deneyimle karşınızda! \"Paint in the Dark\", neon ışıklar altında floresan boyalarla gerçekleşen bir sanat şöleni! Bu gizemli atmosferde hayal gücünüzü serbest bırakın ve içinizdeki sanatçıyı keşfedin.\r\n                Paint in the Dark\" , sıradışı ve unutulmaz bir resim atölyesi deneyimi sunuyor. Burada resim yapmak sadece bir etkinlik değil, aynı zamanda kendinizi ifade etmenin ve sanatı keşfetmenin bir yolu! Üstelik, resim yeteneğinizin olması gerekmiyor!\r\n                Atölyemiz, herkesin katılımına açık.",
+                            EventName = "Paint in the Dark – Karanlıkta Resim",
+                            ImageUrl = "/uploads/karanlıkta_resim.png",
+                            IsOnBanner = true,
+                            IsOnSale = true,
+                            Location = "İstanbul Diyalog Müzesi, Büyükdere Cad. Şişli / Esentepe GAYRETTEPE/İstanbul",
+                            NumberOfTickets = 1510,
+                            Rules = "- Seanslar 16 adet biletle sınırlıdır.\r\n                - Etkinlik girişinde bilet kontrolü yapılacaktır.\r\n                - Etkinlik başlamadan 15 dakika önce etkinlik alanında olmanızı önemle rica ederiz.\r\n                - Etkinlik yaş sınırı ebeveyninin eşlik etmesi koşuluyla 7'dir.\r\n                - Ebeveynin de bilet alması gerekmektedir. Bireysel olarak katılımda yaş sınırı 12'dir.",
+                            StartDate = new DateTime(2025, 5, 30, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            TicketPrice = 950.0
+                        },
+                        new
+                        {
+                            Id = 12,
+                            City = "Ankara",
+                            Country = "Türkiye",
+                            EndDate = new DateTime(2025, 6, 15, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            EventDescription = "Bir varmış bir yokmuş. Ülkenin birinde yaşayan bir çiftçinin dünyalar güzeli, saçları altın sarısı, güzeller mi güzeli kızları Rapunzel dünyaya gelmiş. Bütün ülke Rapunzelin saçlarının sihirli olduğunu düşünüyormuş, bunu duyan cadı Rapunzeli görmek için hatta onu almak için yollara düşmüş.\r\n                Aradan yıllar geçmiş Rapunzel büyümüş cadı onu bir kuleye hapsetmiş ama Rapunzel insanları tanımak, hayvanları, ağaçları, denizleri görmek, dünyayı gezmek istiyormuş. Bir gün Ülkenin prensi tesadüfen kuleyi görmüş ve Rapunzelle tanışmış. Rapunzel ve Prens arkadaş olmuşlar. Prens Rapunzeli kuleden çıkması için ikna etmiş.\r\n                Ama Rapunzel cadıya yakalanmış. Bakalım bu hikayenin devamında Prens ve Rapunzel nasıl bir maceranın içinde olacaklar. İzlemeden bilemeyiz. Belki de cadı iyi bir insan olmaya karar verir, belki Rapunzel babasına kavuşur. Ne dersiniz hadi gelin hikayemizi izlerken hep birlikte öğrenelim.\r\n                Yapımcı: Hasan ACAR\r\n                Uyarlayan ve Yöneten: Nahide AYNI\r\n                Yazan: Yağmur ARAL\r\n                Oyuncular: Rabia ÇELİK, Canan Cansev BAŞKÖK, Çağrı ÇAKIR, Heja ACAR\r\n                Kostüm: Sinem SOYDAN\r\n                Dekor Tasarımı: Duygu GÖKALP\r\n                Işık ve Ses: Yağmur ARAL\r\n                ",
+                            EventName = "Rapunzel",
+                            ImageUrl = "/uploads/rapunzel.jpg",
+                            IsOnBanner = true,
+                            IsOnSale = true,
+                            Location = "Çayyolu Sahne, Dumlupınar Bulvarı No:381 Sisa Kule B Blok No:4 ÇAYYOLU/Ankara",
+                            NumberOfTickets = 1850,
+                            Rules = "- Etkinlikte 3 yaş sınırı vardır.\r\n                - Organizasyon firması, diğer misafirleri rahatsız eden/edecek nitelikte, uygun görmediği kişileri etkinlik için bilet bedelini iade etmek koşuluyla, etkinlik mekanına kişiyi almama hakkına sahiptir.\r\n                - Misafirlerin belirtilen oturma düzenine uyması zorunludur. Etkinlik boyunca belirlenen koltuklarda oturulması gerekmektedir.\r\n                - Etkinlik başlangıç saatinden en az 30 dk. önce biletle birlikte etkinliğin kapısında olacak şekilde hazır olunmasını önemle rica ederiz.\r\n                - Giriş esnasında barkod / bilet kontrolü yapılacağı için biletinizi ibraz etmeniz zorunludur. Öncelikle biletiniz üyelik ile alınmış ise üyelik girişi yapılıp biletlerim alanından biletinize ulaşabilirsiniz. Ulaşamadığınız durumlarda, üyelik ile biletiniz almadıysanız Biletix Müşteri hizmetlerine başvurunuz.\r\n                - Organizatör, indirimli bilet satın alma koşullarında değişiklik yapma hakkını saklı tutar.\r\n                - Organizatör, etkinlik alanı ve saatinde değişiklik yapma hakkına sahiptir.\r\n                - Etkinlik alanına yiyecek ve içecek almak yasaktır.\r\n                - Etkinlik başladıktan sonra salona seyirci alınmayacaktır.\r\n                - Satın alınan biletlerde iptal, iade ve değişiklik yapılmamaktadır.\r\n                - Etkinlik mekanına kamera ve fotoğraf makinası sokmak yasaktır.",
+                            StartDate = new DateTime(2025, 6, 15, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            TicketPrice = 333.0
+                        },
+                        new
+                        {
+                            Id = 13,
+                            City = "Bursa",
+                            Country = "Türkiye",
+                            EndDate = new DateTime(2025, 6, 26, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            EventDescription = "Baturay Özdemir Yeni Gösterisi ile şehrine geliyor...",
+                            EventName = "Baturay Özdemir - Stand Up",
+                            ImageUrl = "/uploads/baturay_özdemir_standup.jpg",
+                            IsOnBanner = false,
+                            IsOnSale = true,
+                            Location = "DasDas Bursa, İstiklal, Fuat Kuşçuoğlu Cd. No:13 D:22, 16200 OSMANGAZİ/Bursa",
+                            NumberOfTickets = 1630,
+                            Rules = "- Etkinlik 13 yaş ve üstü katılımcılar için uygundur. 13 yaş altı etkinliğe alınmamaktadır.\r\n                - Etkinlik başlangıç saatinden en az 30 dk. önce biletle birlikte etkinliğin kapısında olacak şekilde hazır olunması gerekmektedir.\r\n                - Misafirlerin, belirtilen oturma düzenine uyması zorunludur. Etkinlik boyunca belirlenen koltuklarda oturulması gerekmektedir.\r\n                - Organizatör, etkinlik alanı ve saatinde değişiklik yapma hakkına sahiptir.\r\n                - Organizatör, etkinlik için uygun görmediği kişileri, bilet ücretini iade ederek etkinlik mekanına almama hakkına sahiptir.\r\n                - Etkinlik mekanına yiyecek ve içecek sokmak yasaktır.\r\n                - Etkinlik mekanına kamera ve fotoğraf makinası sokmak yasaktır.\r\n                - Etkinlikte görüntü ve ses kaydı alınacaktır,\r\n                - Etkinlik başladıktan sonra gelen seyircilerimizin satın almış oldukları koltuğa oturamama durumundan Biletix ve Organizatör sorumlu değildir. Organizatör firma ve Biletix geç kalan misafirler için koltuk garantisi vermez. Bu sebeple salona etkinlik saatinden önce gelmenizi önemle rica ederiz.",
+                            StartDate = new DateTime(2025, 6, 26, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            TicketPrice = 900.0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            City = "İzmir",
+                            Country = "Türkiye",
+                            EndDate = new DateTime(2025, 6, 12, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventDescription = "Anadolu Ateşi yanmaya devam ediyor!\r\n                Anadolu Ateşi'nin temel konsepti medeniyetler buluşmasıdır. Doğu ile batı kültürlerinin buluşmasını hedefleyen, evrensel barış mesajları veren bir dans portresidir. Halk danslarını bale, modern dans ve dansın diğer disiplinleri ile sentezleyerek dünyaya modern standartlarda bir gösteriyi, bir kültürel şöleni sunmaktadır. Kaynağını Anadolu’nun binlerce yıllık mitolojik ve kültürel tarihinden alan Anadolu  Ateşi hemen hemen her yöreden derlenmiş 3000 halk dansı figürü ve halk müziğini içinde barındıran özgün bir projedir. Mustafa Erdoğan imzasını taşıyan proje, Anadolu’nun binlerce yıllık kültür ve tarih mozaiğinin barışla harmanlanan ateşini tüm dünyaya tanıtmayı hedeflemektedir.\r\n                1999 yılında, yıllar öncesine dayanan bir hayali gerçekleştirmek üzere ilk adımını atan Mustafa Erdoğan, eski adı Sultan’s of the Dance olan projenin tempolu çalışmalarını  başlattı. Önce gazetelere “dansçı aranıyor” ilanları verildi. 750 aday arasından 90 genç  seçildi ve bir buçuk yıl sürecek zorlu bir çalışma temposu başladı. Günde 8, zaman zaman 16 saat süren çalışmalar... Kostümler hazırlandı, müzikler tamamlandı. Estetik egzersiz, dietisyen ve masaj uzmanları ile çalışıldı. Strech ve yoga yapıldı. Çalışmalar halk dansları adımları",
+                            EventName = "Anadolu Ateşi",
+                            ImageUrl = "/uploads/anadolu_ateşi.png",
+                            IsOnBanner = true,
+                            IsOnSale = true,
+                            Location = "İzmir Kültürpark Açıkhava Tiyatrosu, Akdeniz, Fuar Alanı, 35210 MERKEZ/İzmir",
+                            NumberOfTickets = 2870,
+                            Rules = "- Etkinlik başladıktan sonra salona seyirci alınmayacaktır.\r\n                - Satın alınan biletlerde iptal, iade ve değişiklik yapılmamaktadır.\r\n                - 6 yaş altı alana alınmamaktadır.\r\n                - 6 Yaş ve üzeri tam bilete tabidir.\r\n                - Etkinlik mekanına kamera, fotoğraf makinası, ses kayıt cihazı vb. alınmayacaktır.\r\n                - Etkinlik mekanına yiyecek-içecek vb alınmayacaktır.\r\n                - Etkinlik başlangıç saatinden en az 30 dakika önce mekanda hazır olmanızı önemle rica ederiz.\r\n                - Katılımcılar/izleyiciler bileti üzerinde yazan koltuk numarasına oturmak zorundadır.  Bu kurala uymayan ve yer değişikliğinde ısrar eden katılımcılar etkinlik alanı dışına alınacaktır.\r\n                - Etkinlik girişinde bilet kontrolü yapılacaktır, biletinizi telefondan göstermeniz gerekmektedir. Biletler tek kişiliktir.",
+                            StartDate = new DateTime(2025, 6, 12, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            TicketPrice = 1500.0
+                        },
+                        new
+                        {
+                            Id = 15,
+                            City = "Antalya",
+                            Country = "Türkiye",
+                            EndDate = new DateTime(2025, 6, 20, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventDescription = "Parfüm Atölyesi: Kendi Benzersiz Parfümünüzü Yaratın!\r\n\r\n                Hayalinizdeki parfümü yaratmak için ilk adımı atın! Parfüm atölyemizde deneyimli eğitmenlerimiz eşliğinde, parfüm yapımının inceliklerini öğrenerek kişisel tarzınıza uygun benzersiz bir parfüm oluşturabilirsiniz. Taze, çiçeksi, odunsu veya baharatlı... Hangi kokuyu tercih ediyorsanız, bu atölyede 50 ml'lik bir premium şişede %25 esans oranına sahip kendi imzanızı taşıyan kokuyu yaratabilirsiniz. \r\n\r\n                Kendi parfümünüzü oluşturun ve kişisel kokunuzu keşfedin!\r\n                Yaratıcılığınızı konuşturun, kokularla duygusal bir bağ kurun.\r\n                Çay ve lokum eşliğinde keyifli bir ortamda deneyimleyin.\r\n\r\n                Kendiniz veya sevdikleriniz için unutulmaz bir hediye yaratın veya özel bir gün için mükemmel bir etkinlik deneyimi yaşayın.\r\n\r\n                Benzersiz bir parfüm, eşsiz bir deneyim!",
+                            EventName = "Parfüm Yapım Atölyesi",
+                            ImageUrl = "/uploads/parfüm_yapım_atolyesi.jpg",
+                            IsOnBanner = false,
+                            IsOnSale = true,
+                            Location = "Highlights in Antalya Workshops, Tahılpazarı mh. 471. sokak Emel-2 İş Merkezi No:3 K:7 BB: 31 İçkapı: 702 MURATPAŞA/Antalya",
+                            NumberOfTickets = 50,
+                            Rules = "- Atölye tecrübe gerektirmiyor.\r\n                - Etkinlikte kullanılacak tüm malzemeler bilet fiyatına dahildir.\r\n                - Bu etkinlik rezervasyonludur. Bilet alınmadan önce 0545 763 16 77 telefon numarasından yer ayırtılmalıdır.\r\n                - Atölye esnasında sıcak içecekler, su ve lokum ikramı yapılmaktadır.\r\n                - Atölye 5 yaş ve üzeri katılımcılara uygundur.\r\n                - Etkinlik ortalama 2 saat sürmektedir.\r\n                - Katılımcılar seansa yiyecek-içecek getirebilirler.\r\n                - Etkinliğe gecikme süresi 15 dakikadır, 15 dakikadan sonra katılım gerçekleştirilemez.\r\n                - Satın alınan biletler programda değişiklik olmadığı sürece iade edilemez.",
+                            StartDate = new DateTime(2025, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            TicketPrice = 1000.0
                         });
                 });
 
@@ -401,7 +581,42 @@ namespace MeetAppApi.Migrations
                         },
                         new
                         {
+                            EventId = 9,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            EventId = 10,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            EventId = 12,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            EventId = 13,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            EventId = 14,
+                            CategoryId = 1
+                        },
+                        new
+                        {
                             EventId = 2,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            EventId = 9,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            EventId = 14,
                             CategoryId = 2
                         },
                         new
@@ -417,6 +632,21 @@ namespace MeetAppApi.Migrations
                         new
                         {
                             EventId = 4,
+                            CategoryId = 3
+                        },
+                        new
+                        {
+                            EventId = 11,
+                            CategoryId = 3
+                        },
+                        new
+                        {
+                            EventId = 7,
+                            CategoryId = 3
+                        },
+                        new
+                        {
+                            EventId = 12,
                             CategoryId = 3
                         },
                         new
@@ -441,12 +671,32 @@ namespace MeetAppApi.Migrations
                         },
                         new
                         {
+                            EventId = 11,
+                            CategoryId = 5
+                        },
+                        new
+                        {
+                            EventId = 7,
+                            CategoryId = 5
+                        },
+                        new
+                        {
+                            EventId = 15,
+                            CategoryId = 5
+                        },
+                        new
+                        {
                             EventId = 1,
                             CategoryId = 8
                         },
                         new
                         {
                             EventId = 5,
+                            CategoryId = 8
+                        },
+                        new
+                        {
+                            EventId = 12,
                             CategoryId = 8
                         },
                         new
@@ -461,6 +711,21 @@ namespace MeetAppApi.Migrations
                         },
                         new
                         {
+                            EventId = 9,
+                            CategoryId = 9
+                        },
+                        new
+                        {
+                            EventId = 12,
+                            CategoryId = 9
+                        },
+                        new
+                        {
+                            EventId = 14,
+                            CategoryId = 9
+                        },
+                        new
+                        {
                             EventId = 3,
                             CategoryId = 11
                         },
@@ -471,12 +736,37 @@ namespace MeetAppApi.Migrations
                         },
                         new
                         {
+                            EventId = 9,
+                            CategoryId = 12
+                        },
+                        new
+                        {
+                            EventId = 14,
+                            CategoryId = 12
+                        },
+                        new
+                        {
                             EventId = 2,
                             CategoryId = 13
                         },
                         new
                         {
+                            EventId = 9,
+                            CategoryId = 13
+                        },
+                        new
+                        {
+                            EventId = 14,
+                            CategoryId = 13
+                        },
+                        new
+                        {
                             EventId = 7,
+                            CategoryId = 14
+                        },
+                        new
+                        {
+                            EventId = 11,
                             CategoryId = 14
                         },
                         new
@@ -501,6 +791,26 @@ namespace MeetAppApi.Migrations
                         },
                         new
                         {
+                            EventId = 9,
+                            CategoryId = 16
+                        },
+                        new
+                        {
+                            EventId = 10,
+                            CategoryId = 16
+                        },
+                        new
+                        {
+                            EventId = 13,
+                            CategoryId = 16
+                        },
+                        new
+                        {
+                            EventId = 14,
+                            CategoryId = 16
+                        },
+                        new
+                        {
                             EventId = 1,
                             CategoryId = 17
                         },
@@ -523,6 +833,21 @@ namespace MeetAppApi.Migrations
                         {
                             EventId = 5,
                             CategoryId = 17
+                        },
+                        new
+                        {
+                            EventId = 12,
+                            CategoryId = 17
+                        },
+                        new
+                        {
+                            EventId = 10,
+                            CategoryId = 10
+                        },
+                        new
+                        {
+                            EventId = 13,
+                            CategoryId = 10
                         });
                 });
 
@@ -572,10 +897,10 @@ namespace MeetAppApi.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedTime = new DateTime(2025, 5, 17, 16, 27, 36, 403, DateTimeKind.Local).AddTicks(8027),
+                            CreatedTime = new DateTime(2025, 5, 20, 21, 11, 5, 161, DateTimeKind.Local).AddTicks(3889),
                             Email = "ensar.atc@gmail.com",
                             FirstName = "Ensar",
-                            HashedPassword = "$2a$11$Ia3B1gxqVZGRbqO5LrXOKelhwD2k/0.ZJx.LZwzFZR3qSMEc26TR.",
+                            HashedPassword = "$2a$11$mVSKTS47oUdgPYbeaulHlOI.arCPZkXc/55Q3xzyMY8D38Q4nXRBK",
                             LastName = "Atıcı",
                             Location = "Erzincan/TR",
                             Role = 1,
@@ -584,10 +909,10 @@ namespace MeetAppApi.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedTime = new DateTime(2025, 5, 17, 16, 27, 36, 403, DateTimeKind.Local).AddTicks(8046),
+                            CreatedTime = new DateTime(2025, 5, 20, 21, 11, 5, 161, DateTimeKind.Local).AddTicks(3907),
                             Email = "john@hotmail.com",
                             FirstName = "John",
-                            HashedPassword = "$2a$11$CVs1wXBf8tuni/7x0VNTOuSxfOtKDXXhi0JTCz.42hSywDOutDKdm",
+                            HashedPassword = "$2a$11$T4KBuawt3/.QmoRkuHJHW.JmjZ4iOp7eNOzGnzbN2/LXAjGTxPcYe",
                             LastName = "Doe",
                             Location = "Washington/US",
                             Role = 0,
@@ -596,10 +921,10 @@ namespace MeetAppApi.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedTime = new DateTime(2025, 5, 17, 16, 27, 36, 403, DateTimeKind.Local).AddTicks(8048),
+                            CreatedTime = new DateTime(2025, 5, 20, 21, 11, 5, 161, DateTimeKind.Local).AddTicks(3909),
                             Email = "yıldız@gmail.com",
                             FirstName = "Ahmet",
-                            HashedPassword = "$2a$11$eou9g29SBpnDG/54sZcSHev4eYfAcbMR24RftIQlVc7qhloyu/w.m",
+                            HashedPassword = "$2a$11$e0w508ZJyZo5wL3YWLVQLOmCemlgbIRKWrDJKghp5wrEy76iURLI6",
                             LastName = "Yıldız",
                             Location = "Ankara/TR",
                             Role = 0,
@@ -621,13 +946,32 @@ namespace MeetAppApi.Migrations
             modelBuilder.Entity("MeetAppApi.Models.CartEvent", b =>
                 {
                     b.HasOne("MeetAppApi.Models.Cart", "Cart")
-                        .WithMany("Events")
+                        .WithMany()
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MeetAppApi.Models.Event", "Event")
-                        .WithMany("Carts")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Event");
+                });
+
+            modelBuilder.Entity("MeetAppApi.Models.CartItem", b =>
+                {
+                    b.HasOne("MeetAppApi.Models.Cart", "Cart")
+                        .WithMany("Items")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MeetAppApi.Models.Event", "Event")
+                        .WithMany("CartItems")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -658,7 +1002,7 @@ namespace MeetAppApi.Migrations
 
             modelBuilder.Entity("MeetAppApi.Models.Cart", b =>
                 {
-                    b.Navigation("Events");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("MeetAppApi.Models.Category", b =>
@@ -668,7 +1012,7 @@ namespace MeetAppApi.Migrations
 
             modelBuilder.Entity("MeetAppApi.Models.Event", b =>
                 {
-                    b.Navigation("Carts");
+                    b.Navigation("CartItems");
 
                     b.Navigation("Categories");
                 });

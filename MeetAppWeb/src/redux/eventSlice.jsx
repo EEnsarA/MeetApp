@@ -7,6 +7,7 @@ const EVENT_GET = "http://localhost:5134/api/Events";
 
 const initialState = {
     events: [],
+    eventsByCat: [],
     event: {},
     loading: false,
     errMessage: "",
@@ -49,6 +50,12 @@ const eventSlice = createSlice({
     name: "event",
     initialState,
     reducers: {
+        clearEvents: (state) => {
+            state.events = [];
+        },
+        clearEventsByCat: (state) => {
+            state.eventsByCat = [];
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -79,7 +86,7 @@ const eventSlice = createSlice({
             })
             .addCase(getEventsByCategoryId.fulfilled, (state, action) => {
                 state.loading = false;
-                state.events = action.payload;
+                state.eventsByCat = action.payload;
             })
             .addCase(getEventsByCategoryId.rejected, (state, action) => {
                 state.loading = false;
@@ -88,7 +95,7 @@ const eventSlice = createSlice({
     }
 })
 
-export const { } = eventSlice.actions;
+export const { clearEvents, clearEventsByCat } = eventSlice.actions;
 export default eventSlice.reducer;
 
 

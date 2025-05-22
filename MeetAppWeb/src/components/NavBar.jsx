@@ -12,9 +12,9 @@ import { getWeather } from '../hooks/getWeather';
 import { FaUsers } from "react-icons/fa6";
 import { IoMdSettings } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/authSlice';
-import { createTheme, ThemeProvider } from "@mui/material";
+import { Badge, createTheme, ThemeProvider } from "@mui/material";
 import Container from '@mui/material/Container';
 import { customContainer } from '../helpers/customWidgets';
 
@@ -23,6 +23,7 @@ function NavBar() {
     const [address, setAddress] = useState(null);
     const [weather, setWeather] = useState(null);
     const [currentUser, setCurrentUser] = useState({});
+    const { numberOfTicket } = useSelector((store) => store.userCart);
 
     const dispatch = useDispatch();
     const exit = () => {
@@ -92,9 +93,16 @@ function NavBar() {
                             <div className='navBarRight'>
                                 {currentUser.role == "User" ?
                                     <>
-                                        <Link className='navBarLinks'>
+                                        <Link className='navBarLinks' to={"/user-cart"}>
                                             <div className='navbarCartDiv'>
-                                                <FaShoppingCart className='navbarCart' />
+                                                <Badge
+                                                    anchorOrigin={{
+                                                        vertical: "top",
+                                                        horizontal: "left"
+                                                    }}
+                                                    badgeContent={numberOfTicket} color='primary'>
+                                                    <FaShoppingCart className='navbarCart' />
+                                                </Badge>
                                                 <span>Sepetim</span>
                                             </div>
                                         </Link>

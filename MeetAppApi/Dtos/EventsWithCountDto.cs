@@ -1,6 +1,6 @@
 ﻿namespace MeetAppApi.Dtos
 {
-    public class EventDto
+    public class EventsWithCountDto
     {
         public int Id { get; set; }
 
@@ -30,6 +30,6 @@
 
         public string Rules { get; set; } = default!;
 
-
+        public int Count { get; set; } // CartItem.Count bilgisi
     }
 }

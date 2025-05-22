@@ -38,7 +38,7 @@ function HomePage() {
     dispatch(getAllEvents());
   }, [])
   useEffect(() => {
-    console.log(events);
+
   }, [events])
 
 
@@ -60,7 +60,7 @@ function HomePage() {
     const eventDate = new Date(e.startDate);
     const diffTime = eventDate - today;            // milisaniye cinsinden hesaplar !
     const diffDays = diffTime / (1000 * 60 * 60 * 24);  // 1000ms = 1s yani 1 gün  = 1000*60*60*24 ms dir !
-    return diffDays >= 0 && diffDays <= 30
+    return diffDays >= 0 && diffDays <= 10
   })
 
 

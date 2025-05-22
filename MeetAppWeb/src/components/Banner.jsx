@@ -15,7 +15,7 @@ function Banner() {
                                 <p className='bannerSpan'>
                                     Hayatına yeni bir renk kat! Ortak ilgi alanlarına sahip insanlarla bağlantı kur, yeni arkadaşlar ve deneyimler edin , ve binlerce kullanıcıyla buluşma şansı yakala , eğlenceye katılmak için şimdi ilgi alanlarına göre etkinlik ara !
                                 </p>
-                                <button className='bannerButton'>Etkinlik Bul</button>
+                                <button onClick={() => { window.location.href = "/category/tüm-kategoriler/0"; }} className='bannerButton'>Etkinlik Bul</button>
                             </div>
                         </div>
                     </Grid>

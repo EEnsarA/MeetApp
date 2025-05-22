@@ -34,19 +34,21 @@ namespace MeetAppApi.Context
                 .HasOne(u => u.Cart)
                 .WithOne(c => c.User)
                 .HasForeignKey<Cart>(c => c.UserId);
-              
 
 
-            // Many To Many CART-EVENT    
-            modelBuilder.Entity<CartEvent>()
-                .HasOne(c => c.Cart)
-                .WithMany(c => c.Events)
-                .HasForeignKey(c => c.CartId);
 
-            modelBuilder.Entity<CartEvent>()
-                .HasOne(e => e.Event)
-                .WithMany(c => c.Carts)
-                .HasForeignKey(c => c.EventId);
+            // One To Many CART-CARTITEM    
+            modelBuilder.Entity<Cart>()
+                .HasMany(c => c.Items)
+                .WithOne(ci => ci.Cart)
+                .HasForeignKey(i => i.CartId);
+
+            // One To Many EVENT-CARTITEM
+            modelBuilder.Entity<Event>()
+                .HasMany(e => e.CartItems)
+                .WithOne(ci => ci.Event)
+                .HasForeignKey(ci => ci.EventId);
+
 
 
             // -- Seed Data
@@ -55,6 +57,8 @@ namespace MeetAppApi.Context
             modelBuilder.Entity<Category>().HasData(SeedData.CreateCategory());
             modelBuilder.Entity<Event>().HasData(SeedData.createEvent());
             modelBuilder.Entity<EventCategory>().HasData(SeedData.matchCategories());
+            modelBuilder.Entity<Cart>().HasData(SeedData.CreateCart());
+            modelBuilder.Entity<CartItem>().HasData(SeedData.CreateCartItem());
 
 
 
@@ -72,6 +76,8 @@ namespace MeetAppApi.Context
         public DbSet<EventCategory> EventCategories { get; set; }
 
         public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
 
 
     }

@@ -31,37 +31,44 @@ function EventDetail() {
         <>
             <NavBar />
             <ThemeProvider theme={eventDetailContainer}>
-                <Container maxWidth="xl">
-                    <div style={{ padding: "2rem", marginTop: "4rem", display: "flex", flexDirection: "column", alignItems: "flex-start", borderLeft: "1px solid lightgray", borderRight: "1px solid lightgray" }}>
-                        <span style={{ fontSize: "30px", fontWeight: "500", fontFamily: "'Funnel Display', sans-serif", }}>{event.eventName}</span>
-                        <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
-                            <Link style={{ textDecoration: "none" }}>
-                                <FaLocationDot size={12} /><span style={{ marginLeft: "4px", marginRight: "1rem", fontSize: "14px" }}>{event.location}</span>
-                            </Link>
-                            <FaRegCalendar size={12} /><span style={{ marginLeft: "4px", fontSize: "14px" }}>{formatDateTimeTR(event.startDate)} - {formatDateTimeTR(event.endDate)}</span>
-                        </div>
-                        <div style={{ maxWidth: "fit-content", height: "360px", borderRadius: "12px", marginTop: "1rem" }}>
-                            <img src={`${import.meta.env.VITE_API_URL}${event.imageUrl}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "12px" }} />
-                        </div>
-                        <hr />
-                        <div style={{ maxWidth: "1250px", marginTop: "1rem" }}>
-                            <p style={{ fontSize: "16px", fontFamily: "'Funnel Display', sans-serif", lineHeight: "2rem" }}>{event.eventDescription}</p>
-                        </div>
-                        <div style={{ display: "flex", flexDirection: "column", maxWidth: "1250px", marginTop: "1rem" }}>
-                            <p style={{ fontSize: "24px", fontWeight: "500", marginBottom: "1rem" }}>
-                                Etkinlik Takvimi
-                            </p>
+                <Container maxWidth="xl" >
+                    <div className='eventDetailMainDiv'>
+                        <div className='eventDetailDiv'>
                             <div>
-                                <Ticket event={event} />
+                                <span className='eventDetailEventName'>{event.eventName}</span>
                             </div>
-                        </div>
-                        <div style={{ maxWidth: "1250px", marginTop: "1rem" }}>
-                            <p style={{ fontSize: "24px", fontWeight: "500", marginBottom: "1rem" }}>
-                                Etkinlik Kuralları
-                            </p>
-                            {event?.rules?.substring(1).split("-").map((rule, index) => (
-                                <p style={{ fontSize: "16px", fontFamily: "'Funnel Display', sans-serif" }} key={index}>•  {rule.trim()}</p>
-                            ))}
+                            <div className='eventDetailLocationDiv'>
+                                <Link style={{ textDecoration: "none" }}>s
+                                    <FaLocationDot size={12} /><span className='eventDetailLocationSpan'>{event.location}</span>
+                                </Link>
+                                <FaRegCalendar size={12} /><span className='eventDetailDateSpanHead'>{formatDateTimeTR(event.startDate)} - {formatDateTimeTR(event.endDate)}</span>
+                            </div>
+                            <div className='eventDetailImageDiv'>
+                                <img className='eventDetailImage' src={`${import.meta.env.VITE_API_URL}${event.imageUrl}`} alt="" />
+                            </div>
+                            <hr />
+                            <div className='eventDetailDescDiv'>
+                                <p className='eventDetailDescHeader'>
+                                    Etkinliğe Dair
+                                </p>
+                                <p className='eventDetailDescSpan'>{event.eventDescription}</p>
+                            </div>
+                            <div className='eventDetailDateDiv'>
+                                <p className='eventDetailDateSpan'>
+                                    Etkinlik Takvimi
+                                </p>
+                                <div className='eventDetailTicketDiv'>
+                                    <Ticket event={event} />
+                                </div>
+                            </div>
+                            <div className='eventDetailRuleDiv'>
+                                <p className='eventDetailRuleHeader'>
+                                    Etkinlik Kuralları
+                                </p>
+                                {event?.rules?.substring(1).split("-").map((rule, index) => (
+                                    <p className='eventDetailRule' key={index}>•  {rule.trim()}</p>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </Container>

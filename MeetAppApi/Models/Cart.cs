@@ -9,8 +9,9 @@ namespace MeetAppApi.Models
         public int UserId { get; set; }
 
         // Navigation Property
-        public User? User { get; set; } 
+        public User? User { get; set; }
 
-        public ICollection<CartEvent> ?Events { get; set; }
+        public ICollection<CartItem> Items { get; set; } = default!;
+
     }
 }

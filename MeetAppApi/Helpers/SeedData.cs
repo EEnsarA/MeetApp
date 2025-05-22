@@ -33,6 +33,39 @@ namespace MeetAppApi.Helpers
             return users;
         }
 
+        public static List<Cart> CreateCart()
+        {
+            var cartData = new (int id, int userId)[]{
+                (1,2), (2,3)
+
+            };
+            var carts = cartData.Select(c => new Cart
+            {
+                Id = c.id,
+                UserId = c.userId,
+            }).ToList();
+
+            return carts;
+        }
+
+        public static List<CartItem> CreateCartItem()
+        {
+            var cartItemData = new (int id, int cartId, int eventId, int count)[]{
+                (1,1,2,1),(2,1,4,1),
+                (3,2,6,1),
+            };
+            var cartItems = cartItemData.Select(c => new CartItem
+            {
+                Id = c.id,
+                CartId = c.cartId,
+                EventId = c.eventId,
+                Count = c.count,
+            }).ToList();
+
+            return cartItems;
+        }   
+
+
         public static List<Category> CreateCategory()
         {
             var categoryData = new (int id, string categoryName)[]
@@ -92,7 +125,7 @@ namespace MeetAppApi.Helpers
                 "İstanbul",
                 "Türkiye",
                 "Alemdar Cad. No:5 Sultanahmet Fatih İstanbul (Yerebatan Sarnıcı yanı) FATİH/İstanbul",
-                new DateTime(2025,5,18,16,00,0),
+                new DateTime(2025,5,27,16,00,0),
                 new DateTime(2025,5,31,16,00,0),
                 14000,
                 1250.00,
@@ -154,7 +187,7 @@ namespace MeetAppApi.Helpers
                 BUBBLE SHOW 
                 PALYAÇO SHOW, gibi birçok eğlenceli aktiviteler bulunmaktadır. 
                 Sizler de yerinizi ayırmayı ve ANKARA ÇOCUK SİRKİ için unutulmaz sahne gösterilerinde hatıralar biriktirmeyi unutmayın. 
-                2-12 Yaş arası için uygundur. 
+                2,12 Yaş arası için uygundur. 
                 Süre: 45 Dk.",
                 "/uploads/cocuk_sirki.png",
                 "Samsun",
@@ -346,6 +379,197 @@ namespace MeetAppApi.Helpers
                 - Workshop boyunca yapacağınız yemeklerin fazlasının gıda atığı olmaması adına, saklama kaplarınızı yanınızda getirerek evinize götürebilir, böylece aynı zamanda sevdiklerinizle de paylaşabilirsiniz.
                 - Eataly’de düzenlenen workshoplar “profesyonel eğitim” kapsamına girmemektedir. Workshoplar, hobi ve eğlence amaçlı olup; etkinliğin türüne göre farklı teorik bilgiler workshop şefi tarafından anlatılabilmektedir."
                 ),
+                (
+                9,
+                "Trakya Müzik Festivali 2025",
+                @"Trakya Müzik Festivali, 31 Temmuz/1-2-3 Ağustos tarihlerinde sizleri bekliyor!
+                Türkiye’nin en büyük müzik festivallerinden biri olan Trakya Müzik Festivali, her yıl binlerce müzikseveri Saros Körfezi’nin benzersiz doğasında bir araya getiriyor.
+                Denizin hemen yanı başında, eşsiz gün batımları eşliğinde günler süren müzik ve eğlence, festival ruhunu en üst seviyede yaşatıyor. Alternatif, rock, pop ve elektronik müzik sahnesinin en sevilen isimlerinin performanslarıyla dolu bu unutulmaz etkinlik, katılımcılara sadece müzik değil; doğayla iç içe, özgür ve sınırsız bir festival deneyimi sunuyor. Kamp alanında konaklayarak yıldızların altında uyanabilir, denizin tadını çıkarabilir ve gün boyu süren etkinliklerle festivalin enerjisine kendini bırakabilirsin.
+                Her yıl daha da büyüyen Trakya Müzik Festivali, müzik, doğa ve eğlenceyi bir arada yaşamak isteyenler için yılın en özel etkinliklerinden biri olmaya devam ediyor.",
+                "/uploads/trakya_müzik_fest.jpg",
+                "Edirne",
+                "Türkiye",
+                "Soroz Körfezi/KEŞAN/Edirne",
+                new DateTime(2025,7,31,14,00,0),
+                new DateTime(2025,7,31,14,00,0),
+                2500,
+                1200.00,
+                true,
+                false,
+                @"- Kapı açılış saati 14:00
+                - 18 yaş sınırı yoktur, 18 yaş altındaki katılımcılara farklı renkte bileklik takılacaktır.
+                - Festival biletlerinin iade edilmesi veya festival biletlerinde değişiklik yapılması mümkün değildir.
+                - Festival biletinin kaybolması veya çalınması, alıcı sorumluluğundadır. Çalınan ya da kaybolan biletin yenisiyle değiştirilmesi veya para iadesi mümkün değildir.
+                - Festival alanına profesyonel ses ve görüntü kaydı yapan cihazlar, içecekler, cam, plastik şişe, teneke, havai fişek, yanıcı parlayıcı her türlü nesne (parfüm, böcek ilacı vb.), silah veya keskin nesneler getirmek yasaktır. Ayrıca yanınızda getirmeyi planladığınız katlanabilir sandalye ya da şemsiyeler güvenlik tarafından içeri alınmayabilir. 
+                - Festival biletini satın alanlar, festival konserlerinin görüntü ve/veya ses kaydından alıntı yapamaz, bu konserlerin ve sanatçıların görüntülerini içeren görsel ve/veya işitsel kayıtları kaydedemez, ses ve görüntü taşıyıcılara ve/veya fonogramlara kayıt ederek çoğaltamaz ve yayımlayamaz ve umuma dağıtamaz, TV kanallarında, internet mecrasında ve GSM operatörleri kanalıyla yayınlanamaz.
+                - Festival alanında ateş yakmak kesinlikle yasaktır."
+                ),
+                (
+                10,
+                "Doğu Demirkol",
+                @"Türkiye, Avrupa ve Amerika’da ve dünyanın farklı şehirlerinde gerçekleştirdiği tek kişilik gösterisinde kendi yaşamından ve bu topraklarda güldürü niteliği taşıyan her olaydan beslenen Doğu Demirkol, bu sezon da seyircisi ile buluşmaya devam ediyor.",
+                "/uploads/doğu_demirkol_standup.jpg",
+                "Eskişehir",
+                "Türkiye",
+                "Eskişehir Atatürk Kültür Sanat ve Kongre Merkezi, Eskişehir",
+                new DateTime(2025,5,27,20,30,0),
+                new DateTime(2025,5,27,20,30,0),
+                920,
+                1250.00,
+                true,
+                true,
+                @"- Etkinlik girişinde bilet kontrolü yapılacaktır, biletinizi telefondan göstermeniz gerekmektedir.
+                - 8 yaşından küçük çocuklar etkinliğe alınmamaktadır. 8 yaş ve üzeri bilete tabidir.
+                - Dışardan yiyecek ve içecek alınmayacaktır.
+                - Organizasyon şirketinin programda ve bilet fiyatlarında değişiklik yapma hakkı saklıdır.
+                - Organizasyon firması, diğer misafirleri rahatsız eden/edecek nitelikte, uygun görmediği kişileri etkinlik için bilet bedelini iade etmek koşuluyla, etkinlik mekanına kişiyi almama hakkına sahiptir.
+                - Etkinlik mekanına kamera, fotoğraf makinası, ses cihazı vb. alınmayacaktır.
+                - Satın alınan biletlerde iptal, iade ve değişiklik yapılmamaktadır.
+                - Etkinlik boyunca ses ve görüntü kaydı yapılacaktır. Organizatör ve sanatçı daha sonra bu görüntüleri katılımcılardan herhangi bir onay almaksızın kullanma hakkına sahiptir.- Etkinlik alanına giriş yapan katılımcıların alandan çıkış yapmaları halinde yeni bilet satın almaları gerekmektedir.
+                - Etkinlik alanına ateşli silahlar, yanıcı, patlayıcı, parlayıcı (*deodorant, *sprey, *parfüm,  vb. gibi), kesici, delici, bereleyici, saldırı ve savunma amacıyla olmasa bile fiilen saldırı ve savunmada kullanılmaya elverişli (*kask, *kamp sandalyesi, *selfie çubuğu, *tripod, *pantolon zinciri vb.) her türlü alet ve lazer imleci ile girmek yasaktır."
+                ),
+                (
+                11,
+                "Paint in the Dark – Karanlıkta Resim",
+                @"İstanbul Diyalog Müzesi, yepyeni bir deneyimle karşınızda! ""Paint in the Dark"", neon ışıklar altında floresan boyalarla gerçekleşen bir sanat şöleni! Bu gizemli atmosferde hayal gücünüzü serbest bırakın ve içinizdeki sanatçıyı keşfedin.
+                Paint in the Dark"" , sıradışı ve unutulmaz bir resim atölyesi deneyimi sunuyor. Burada resim yapmak sadece bir etkinlik değil, aynı zamanda kendinizi ifade etmenin ve sanatı keşfetmenin bir yolu! Üstelik, resim yeteneğinizin olması gerekmiyor!
+                Atölyemiz, herkesin katılımına açık.",
+                "/uploads/karanlıkta_resim.png",
+                "İstanbul",
+                "Türkiye",
+                "İstanbul Diyalog Müzesi, Büyükdere Cad. Şişli / Esentepe GAYRETTEPE/İstanbul",
+                new DateTime(2025,5,30,14,00,0),
+                new DateTime(2025,5,31,14,00,0),
+                1510,
+                950.00,
+                true,
+                true,
+                @"- Seanslar 16 adet biletle sınırlıdır.
+                - Etkinlik girişinde bilet kontrolü yapılacaktır.
+                - Etkinlik başlamadan 15 dakika önce etkinlik alanında olmanızı önemle rica ederiz.
+                - Etkinlik yaş sınırı ebeveyninin eşlik etmesi koşuluyla 7'dir.
+                - Ebeveynin de bilet alması gerekmektedir. Bireysel olarak katılımda yaş sınırı 12'dir."
+                ),
+                (
+                12,
+                "Rapunzel",
+                @"Bir varmış bir yokmuş. Ülkenin birinde yaşayan bir çiftçinin dünyalar güzeli, saçları altın sarısı, güzeller mi güzeli kızları Rapunzel dünyaya gelmiş. Bütün ülke Rapunzelin saçlarının sihirli olduğunu düşünüyormuş, bunu duyan cadı Rapunzeli görmek için hatta onu almak için yollara düşmüş.
+                Aradan yıllar geçmiş Rapunzel büyümüş cadı onu bir kuleye hapsetmiş ama Rapunzel insanları tanımak, hayvanları, ağaçları, denizleri görmek, dünyayı gezmek istiyormuş. Bir gün Ülkenin prensi tesadüfen kuleyi görmüş ve Rapunzelle tanışmış. Rapunzel ve Prens arkadaş olmuşlar. Prens Rapunzeli kuleden çıkması için ikna etmiş.
+                Ama Rapunzel cadıya yakalanmış. Bakalım bu hikayenin devamında Prens ve Rapunzel nasıl bir maceranın içinde olacaklar. İzlemeden bilemeyiz. Belki de cadı iyi bir insan olmaya karar verir, belki Rapunzel babasına kavuşur. Ne dersiniz hadi gelin hikayemizi izlerken hep birlikte öğrenelim.
+                Yapımcı: Hasan ACAR
+                Uyarlayan ve Yöneten: Nahide AYNI
+                Yazan: Yağmur ARAL
+                Oyuncular: Rabia ÇELİK, Canan Cansev BAŞKÖK, Çağrı ÇAKIR, Heja ACAR
+                Kostüm: Sinem SOYDAN
+                Dekor Tasarımı: Duygu GÖKALP
+                Işık ve Ses: Yağmur ARAL
+                ",
+                "/uploads/rapunzel.jpg",
+                "Ankara",
+                "Türkiye",
+                "Çayyolu Sahne, Dumlupınar Bulvarı No:381 Sisa Kule B Blok No:4 ÇAYYOLU/Ankara",
+                new DateTime(2025,6,15,16,30,0),
+                new DateTime(2025,6,15,16,30,0),
+                1850,
+                333.00,
+                true,
+                true,
+                @"- Etkinlikte 3 yaş sınırı vardır.
+                - Organizasyon firması, diğer misafirleri rahatsız eden/edecek nitelikte, uygun görmediği kişileri etkinlik için bilet bedelini iade etmek koşuluyla, etkinlik mekanına kişiyi almama hakkına sahiptir.
+                - Misafirlerin belirtilen oturma düzenine uyması zorunludur. Etkinlik boyunca belirlenen koltuklarda oturulması gerekmektedir.
+                - Etkinlik başlangıç saatinden en az 30 dk. önce biletle birlikte etkinliğin kapısında olacak şekilde hazır olunmasını önemle rica ederiz.
+                - Giriş esnasında barkod / bilet kontrolü yapılacağı için biletinizi ibraz etmeniz zorunludur. Öncelikle biletiniz üyelik ile alınmış ise üyelik girişi yapılıp biletlerim alanından biletinize ulaşabilirsiniz. Ulaşamadığınız durumlarda, üyelik ile biletiniz almadıysanız Biletix Müşteri hizmetlerine başvurunuz.
+                - Organizatör, indirimli bilet satın alma koşullarında değişiklik yapma hakkını saklı tutar.
+                - Organizatör, etkinlik alanı ve saatinde değişiklik yapma hakkına sahiptir.
+                - Etkinlik alanına yiyecek ve içecek almak yasaktır.
+                - Etkinlik başladıktan sonra salona seyirci alınmayacaktır.
+                - Satın alınan biletlerde iptal, iade ve değişiklik yapılmamaktadır.
+                - Etkinlik mekanına kamera ve fotoğraf makinası sokmak yasaktır."
+                ),
+                (
+                13,
+                "Baturay Özdemir - Stand Up",
+                @"Baturay Özdemir Yeni Gösterisi ile şehrine geliyor...",
+                "/uploads/baturay_özdemir_standup.jpg",
+                "Bursa",
+                "Türkiye",
+                "DasDas Bursa, İstiklal, Fuat Kuşçuoğlu Cd. No:13 D:22, 16200 OSMANGAZİ/Bursa",
+                new DateTime(2025,6,26,20,30,0),
+                new DateTime(2025,6,26,20,30,0),
+                1630,
+                900.00,
+                true,
+                false,
+                @"- Etkinlik 13 yaş ve üstü katılımcılar için uygundur. 13 yaş altı etkinliğe alınmamaktadır.
+                - Etkinlik başlangıç saatinden en az 30 dk. önce biletle birlikte etkinliğin kapısında olacak şekilde hazır olunması gerekmektedir.
+                - Misafirlerin, belirtilen oturma düzenine uyması zorunludur. Etkinlik boyunca belirlenen koltuklarda oturulması gerekmektedir.
+                - Organizatör, etkinlik alanı ve saatinde değişiklik yapma hakkına sahiptir.
+                - Organizatör, etkinlik için uygun görmediği kişileri, bilet ücretini iade ederek etkinlik mekanına almama hakkına sahiptir.
+                - Etkinlik mekanına yiyecek ve içecek sokmak yasaktır.
+                - Etkinlik mekanına kamera ve fotoğraf makinası sokmak yasaktır.
+                - Etkinlikte görüntü ve ses kaydı alınacaktır,
+                - Etkinlik başladıktan sonra gelen seyircilerimizin satın almış oldukları koltuğa oturamama durumundan Biletix ve Organizatör sorumlu değildir. Organizatör firma ve Biletix geç kalan misafirler için koltuk garantisi vermez. Bu sebeple salona etkinlik saatinden önce gelmenizi önemle rica ederiz."
+                ),
+                (
+                14,
+                "Anadolu Ateşi",
+                @"Anadolu Ateşi yanmaya devam ediyor!
+                Anadolu Ateşi'nin temel konsepti medeniyetler buluşmasıdır. Doğu ile batı kültürlerinin buluşmasını hedefleyen, evrensel barış mesajları veren bir dans portresidir. Halk danslarını bale, modern dans ve dansın diğer disiplinleri ile sentezleyerek dünyaya modern standartlarda bir gösteriyi, bir kültürel şöleni sunmaktadır. Kaynağını Anadolu’nun binlerce yıllık mitolojik ve kültürel tarihinden alan Anadolu  Ateşi hemen hemen her yöreden derlenmiş 3000 halk dansı figürü ve halk müziğini içinde barındıran özgün bir projedir. Mustafa Erdoğan imzasını taşıyan proje, Anadolu’nun binlerce yıllık kültür ve tarih mozaiğinin barışla harmanlanan ateşini tüm dünyaya tanıtmayı hedeflemektedir.
+                1999 yılında, yıllar öncesine dayanan bir hayali gerçekleştirmek üzere ilk adımını atan Mustafa Erdoğan, eski adı Sultan’s of the Dance olan projenin tempolu çalışmalarını  başlattı. Önce gazetelere “dansçı aranıyor” ilanları verildi. 750 aday arasından 90 genç  seçildi ve bir buçuk yıl sürecek zorlu bir çalışma temposu başladı. Günde 8, zaman zaman 16 saat süren çalışmalar... Kostümler hazırlandı, müzikler tamamlandı. Estetik egzersiz, dietisyen ve masaj uzmanları ile çalışıldı. Strech ve yoga yapıldı. Çalışmalar halk dansları adımları",
+                "/uploads/anadolu_ateşi.png",
+                "İzmir",
+                "Türkiye",
+                "İzmir Kültürpark Açıkhava Tiyatrosu, Akdeniz, Fuar Alanı, 35210 MERKEZ/İzmir",
+                new DateTime(2025,6,12,21,00,0),
+                new DateTime(2025,6,12,21,00,0),
+                2870,
+                1500.00,
+                true,
+                true,
+                @"- Etkinlik başladıktan sonra salona seyirci alınmayacaktır.
+                - Satın alınan biletlerde iptal, iade ve değişiklik yapılmamaktadır.
+                - 6 yaş altı alana alınmamaktadır.
+                - 6 Yaş ve üzeri tam bilete tabidir.
+                - Etkinlik mekanına kamera, fotoğraf makinası, ses kayıt cihazı vb. alınmayacaktır.
+                - Etkinlik mekanına yiyecek-içecek vb alınmayacaktır.
+                - Etkinlik başlangıç saatinden en az 30 dakika önce mekanda hazır olmanızı önemle rica ederiz.
+                - Katılımcılar/izleyiciler bileti üzerinde yazan koltuk numarasına oturmak zorundadır.  Bu kurala uymayan ve yer değişikliğinde ısrar eden katılımcılar etkinlik alanı dışına alınacaktır.
+                - Etkinlik girişinde bilet kontrolü yapılacaktır, biletinizi telefondan göstermeniz gerekmektedir. Biletler tek kişiliktir."
+                ),
+                (
+                15,
+                "Parfüm Yapım Atölyesi",
+                @"Parfüm Atölyesi: Kendi Benzersiz Parfümünüzü Yaratın!
+
+                Hayalinizdeki parfümü yaratmak için ilk adımı atın! Parfüm atölyemizde deneyimli eğitmenlerimiz eşliğinde, parfüm yapımının inceliklerini öğrenerek kişisel tarzınıza uygun benzersiz bir parfüm oluşturabilirsiniz. Taze, çiçeksi, odunsu veya baharatlı... Hangi kokuyu tercih ediyorsanız, bu atölyede 50 ml'lik bir premium şişede %25 esans oranına sahip kendi imzanızı taşıyan kokuyu yaratabilirsiniz. 
+
+                Kendi parfümünüzü oluşturun ve kişisel kokunuzu keşfedin!
+                Yaratıcılığınızı konuşturun, kokularla duygusal bir bağ kurun.
+                Çay ve lokum eşliğinde keyifli bir ortamda deneyimleyin.
+
+                Kendiniz veya sevdikleriniz için unutulmaz bir hediye yaratın veya özel bir gün için mükemmel bir etkinlik deneyimi yaşayın.
+
+                Benzersiz bir parfüm, eşsiz bir deneyim!",
+                "/uploads/parfüm_yapım_atolyesi.jpg",
+                "Antalya",
+                "Türkiye",
+                "Highlights in Antalya Workshops, Tahılpazarı mh. 471. sokak Emel-2 İş Merkezi No:3 K:7 BB: 31 İçkapı: 702 MURATPAŞA/Antalya",
+                new DateTime(2025,6,20,16,00,0),
+                new DateTime(2025,6,20,20,00,0),
+                50,
+                1000.00,
+                true,
+                false,
+                @"- Atölye tecrübe gerektirmiyor.
+                - Etkinlikte kullanılacak tüm malzemeler bilet fiyatına dahildir.
+                - Bu etkinlik rezervasyonludur. Bilet alınmadan önce 0545 763 16 77 telefon numarasından yer ayırtılmalıdır.
+                - Atölye esnasında sıcak içecekler, su ve lokum ikramı yapılmaktadır.
+                - Atölye 5 yaş ve üzeri katılımcılara uygundur.
+                - Etkinlik ortalama 2 saat sürmektedir.
+                - Katılımcılar seansa yiyecek-içecek getirebilirler.
+                - Etkinliğe gecikme süresi 15 dakikadır, 15 dakikadan sonra katılım gerçekleştirilemez.
+                - Satın alınan biletler programda değişiklik olmadığı sürece iade edilemez."
+                ),
             };
 
 
@@ -377,31 +601,33 @@ namespace MeetAppApi.Helpers
             var categoryEventData = new (int categoryId, int eventId)[]
             {
                 //sahne
-                (1,5),(1,1),
+                (1,5),(1,1),(1,9),(1,10),(1,12),(1,13),(1,14),
                 //müzik
-                (2,2),
+                (2,2),(2,9),(2,14),
                 //aile
-                (3,1),(3,3),(3,4),
+                (3,1),(3,3),(3,4),(3,11),(3,7),(3,12),
                 //spor
                 (4,6),(4,4),
                 //eğitim
-                (5,8),(5,5),
+                (5,8),(5,5),(5,11),(5,7),(5,15),
                 //tiyatro
-                (8,1),(8,5),
+                (8,1),(8,5),(8,12),
                 //dans
-                (9,2),(9,4),
+                (9,2),(9,4),(9,9),(9,12),(9,14),
                 //sirk
                 (11,3),
                 //açıkhava
-                (12,2),
+                (12,2),(12,9),(12,14),
                 //festival
-                (13,2),
+                (13,2),(13,9),(13,14),
                 //müze & sergi
-                (14,7),
+                (14,7),(14,11),
                 //sosyal etkinlik
-                (16,2),(16,3),(16,4),(16,7),
+                (16,2),(16,3),(16,4),(16,7),(16,9),(16,10),(16,13),(16,14),
                 //gösteri
-                (17,1),(17,2),(17,3),(17,4),(17,5),
+                (17,1),(17,2),(17,3),(17,4),(17,5),(17,12),
+                //stand-up
+                (10,10),(10,13),
             };
 
             var categoryEvents = categoryEventData.Select(c => new EventCategory

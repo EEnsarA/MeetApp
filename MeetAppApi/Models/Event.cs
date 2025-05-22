@@ -34,7 +34,7 @@
 
         public virtual ICollection<EventCategory> ?Categories { get; set; }
 
-        public virtual ICollection<CartEvent> ?Carts { get; set; }
+        public virtual ICollection<CartItem> ?CartItems { get; set; }
         
         
 
