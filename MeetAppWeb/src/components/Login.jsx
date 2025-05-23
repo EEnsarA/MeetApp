@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { TbHexagonLetterM } from "react-icons/tb";
 import { useFormik } from "formik";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { loginFormSchema } from '../schemas/LoginFormSchema';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
 import { IoWarning } from "react-icons/io5";
+import { TbCircleLetterMFilled } from "react-icons/tb";
 
 
 function Login() {
@@ -88,7 +88,7 @@ function Login() {
         </div>
         <div className='loginHrDiv'>
           <hr className='loginHr' />
-          <span><TbHexagonLetterM fontSize={18} /></span>
+          <span><TbCircleLetterMFilled fontSize={18} /></span>
           <hr className='loginHr' />
         </div>
       </form>

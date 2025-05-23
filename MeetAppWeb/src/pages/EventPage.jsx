@@ -227,10 +227,17 @@ function EventPage() {
                 console.error("Kategoriye göre etkinlik getirme başarısız.");
                 return;
             }
-        } else if (events?.length > 0) {
-            baseEvents = [...events];
+        } else {
+            navigate("/category/tüm-kategoriler/0");
+            dispatch(clearEvents());
+            const resultAction = await dispatch(getAllEvents());
+            if (getAllEvents.fulfilled.match(resultAction)) {
+                baseEvents = resultAction.payload;
+            } else {
+                console.error("Tüm etkinlikleri getirme başarısız.");
+                return;
+            }
         }
-
 
         let filtered = [...baseEvents];
         console.log("filtered başta :", filtered);
@@ -273,7 +280,7 @@ function EventPage() {
         // tüm kategoriler , tüm şehirler , tüm tarihler aratılırsa
         if (selectedCategory == 0 && selectedCity == 0 && selectedDate == "Tüm Tarihler") {
             setFilteredEvents(null);
-            window.location.href = "/category/tüm-kategoriler/0";
+            navigate("/category/tüm-kategoriler/0");
         }
 
 

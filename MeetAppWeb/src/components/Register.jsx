@@ -6,6 +6,7 @@ import { registerFormSchema } from '../schemas/RegisterFormSchema';
 import { useDispatch } from 'react-redux';
 import { register } from '../redux/authSlice';
 import { IoWarning } from "react-icons/io5";
+import { TbCircleLetterMFilled } from "react-icons/tb";
 
 function Register() {
 
@@ -128,7 +129,7 @@ function Register() {
         </div>
         <div className='loginHrDiv'>
           <hr className='loginHr' />
-          <span><TbHexagonLetterM fontSize={18} /></span>
+          <span><TbCircleLetterMFilled fontSize={18} /></span>
           <hr className='loginHr' />
         </div>
       </form>

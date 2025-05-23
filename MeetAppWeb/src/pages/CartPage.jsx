@@ -4,21 +4,26 @@ import { ThemeProvider } from "@mui/material";
 import Container from '@mui/material/Container';
 import { eventDetailContainer } from '../helpers/customWidgets';
 import { useDispatch, useSelector } from 'react-redux';
-import { calculateCart, getUserCart, removeEventFromUserCart } from '../redux/cartSlice';
+import { calculateCart, clearCartRemovedMessage, clearUserCart, getUserCart, removeEventFromUserCart, updateEventTickets } from '../redux/cartSlice';
 import Grid from '@mui/material/Grid';
 import { FaLocationDot } from "react-icons/fa6";
 import { FaRegCalendar } from "react-icons/fa6";
 import { formatDateTimeTR } from '../helpers/stringHelpers';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaShoppingCart } from "react-icons/fa";
 import { TiDeleteOutline } from "react-icons/ti";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import PaymentModal from '../components/PaymentModel';
 
 function CartPage() {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { userCart, amountCart, cartRemovedMessage, cartAddedMessage, numberOfTicket } = useSelector((store) => store.userCart)
+    const { userCart, amountCart, cartRemovedMessage, ticketUpdateMessage, numberOfTicket } = useSelector((store) => store.userCart)
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [paymentOpen, setPaymentOpen] = useState(false);
+    const [confirmOrder, setConfirmOrder] = useState(false);
 
     useEffect(() => {
         if (sessionStorage.getItem("current_user")) {
@@ -28,10 +33,43 @@ function CartPage() {
     }, [])
     useEffect(() => {
         dispatch(calculateCart());
-        console.log(userCart);
+
     }, [userCart])
 
+    useEffect(() => {
+        if (confirmOrder && userCart) {
+            console.log("order finished !")
+            const ticketsInfo = [];
+            userCart?.map((u) => {
+                const ticket = {
+                    "eventId": u.id,
+                    "ticketCount": u.count
+                }
+                ticketsInfo.push(ticket)
+            })
+            dispatch(updateEventTickets(ticketsInfo));
+            setConfirmOrder(false);
+        }
+    }, [confirmOrder])
+
+    useEffect(() => {
+
+        if (ticketUpdateMessage) {
+            const sessionUser = JSON.parse(sessionStorage.getItem("current_user"));
+            console.log(ticketUpdateMessage);
+            dispatch(clearUserCart(sessionUser.nameid));
+            navigate(0)
+        }
+
+    }, [ticketUpdateMessage])
+
     const [open, setOpen] = useState(false);
+
+    // payment modal 
+    const handleConfirmOrder = () => {
+        setPaymentOpen(true);
+    };
+
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -39,6 +77,8 @@ function CartPage() {
         }
         setOpen(false);
     };
+
+
 
 
     const deleteEventFromCart = (u) => {
@@ -54,9 +94,10 @@ function CartPage() {
     }
 
     useEffect(() => {
-        if (cartRemovedMessage) {
+        if (cartRemovedMessage && cartRemovedMessage.length > 0) {
+            setSnackbarMessage(cartRemovedMessage);
             setOpen(true);
-            console.log(cartRemovedMessage);
+            dispatch(clearCartRemovedMessage());
         }
     }, [cartRemovedMessage]);
 
@@ -91,7 +132,7 @@ function CartPage() {
                                                             <span className='cartEventName'>{u.eventName}</span>
                                                         </div>
                                                         <div className='cartEventLocationDiv'>
-                                                            <FaLocationDot size={14} /><span className='cartLocationSpan'>{u.city}/{u.country}</span>
+                                                            <FaLocationDot size={14} color='#014d57' /><span className='cartLocationSpan'>{u.city}/{u.country}</span>
                                                             <FaRegCalendar size={14} /><span className='cartDateSpan'>{formatDateTimeTR(u.startDate)}</span>
                                                         </div>
                                                         <div className='cartEventPriceDiv'>
@@ -99,12 +140,18 @@ function CartPage() {
                                                             <span className='cartEventPriceSpan'>₺{u.ticketPrice * u.count},00</span>
                                                         </div>
                                                     </div>
-                                                    {/* <div className='cartEventPriceDiv'>
-                                                            <span className='cartEventPriceSpan'>₺{u.ticketPrice * u.count},00</span>
-                                                        </div> */}
+
                                                 </div>
                                             </Link>
                                         ))}
+                                        {userCart == null &&
+                                            <>
+                                                <div className='cartEventInfoDiv'>
+                                                    <span className='cartEventName'>Sepetiniz boş</span>
+                                                </div>
+                                            </>
+
+                                        }
                                     </div>
                                 </Grid>
                                 <Grid size={{ xs: 4, md: 4 }}>
@@ -121,26 +168,45 @@ function CartPage() {
                                             <div>
                                                 <span></span>
                                             </div>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                                            <div className='cartEventBuySummary'>
+                                                {userCart?.map((item) => (
+                                                    <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                                        <span style={{ fontSize: '0.85rem', color: '#333' }}>- {item.eventName} x{item.count}</span>
+                                                        <span style={{ fontSize: '0.85rem', fontWeight: '500' }}>₺{item.ticketPrice * item.count},00</span>
+                                                    </div>
+                                                ))}
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                                    <span style={{ fontSize: '0.85rem', color: '#333', fontWeight: '600' }}>- Sipariş Bedeli</span>
+                                                    <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>₺{numberOfTicket * 4},00</span>
+                                                </div>
+                                            </div>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: "6rem" }}>
                                                 <div>
                                                     <span className='cartEventPriceText'>Toplam Tutar</span>
                                                 </div>
                                                 <div>
-                                                    <span className='cartEventPriceSpan'>₺{amountCart},00</span>
+                                                    <span className='cartEventPriceSpan'>₺{amountCart + (numberOfTicket * 4)},00</span>
                                                 </div>
                                             </div>
                                             <div>
-                                                <button className='cartEventBuyButton'>Sepeti Onayla</button>
+                                                <button onClick={handleConfirmOrder} className='cartEventBuyButton'>Sepeti Onayla</button>
                                             </div>
-
+                                            <PaymentModal
+                                                open={paymentOpen}
+                                                onClose={() => setPaymentOpen(false)}
+                                                confirmOrder={() => setConfirmOrder(true)}
+                                            />
+                                            <div>
+                                                <button onClick={() => { window.location.href = "/category/tüm-kategoriler/0"; }} className='cartEventContinueButton'>Alışverişe Devam Et</button>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <Snackbar
                                         open={open}
                                         onClose={handleClose}
                                         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                                         autoHideDuration={4000}
-                                        message={cartRemovedMessage.message}
                                     >
                                         <Alert
                                             onClose={handleClose}
@@ -148,7 +214,7 @@ function CartPage() {
                                             variant="filled"
                                             sx={{ width: '100%' }}
                                         >
-                                            {cartRemovedMessage.message}
+                                            {snackbarMessage || "Hata oluştu."}
                                         </Alert>
                                     </Snackbar>
                                 </Grid>

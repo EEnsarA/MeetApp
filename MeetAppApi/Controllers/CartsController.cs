@@ -4,6 +4,7 @@ using MeetAppApi.Dtos;
 using MeetAppApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MeetAppApi.Controllers
 {
@@ -180,5 +181,58 @@ namespace MeetAppApi.Controllers
             }
         }
 
+        // http://localhost:5134/api/carts/updateTickets
+        [HttpPost("updateTickets")]
+        public async Task<IActionResult> UpdateEventTickets([FromBody]List<UpdateEventTicketsDto> ticketUpdates)
+        {
+            if (ticketUpdates == null)
+                return BadRequest();
+            var eventIds = ticketUpdates.Select(t => t.EventId).ToList();
+
+            var existingEvents = await _context.Events.Where(e => eventIds.Contains(e.Id)).ToListAsync();
+
+            foreach(var ticket in ticketUpdates)
+            {
+                var ev = existingEvents.FirstOrDefault(e => e.Id == ticket.EventId);
+                if (ev == null)
+                    return NotFound("Event not found");
+
+                if (ev.NumberOfTickets < ticket.TicketCount)
+                    return BadRequest($"Not enough tickets available");
+                
+                ev.NumberOfTickets -= ticket.TicketCount;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Event tickets updated successfully.");
+
+        }
+
+        // http://localhost:5134/api/carts/clearCart/id
+        [HttpPost("clearCart/{userId}")]
+        public async Task<IActionResult> ClearCart(int? userId)
+        {
+            try
+            {
+                var cart = await _context.Carts
+                    .Include(c => c.Items)
+                    .FirstOrDefaultAsync(c => c.UserId == userId);
+
+                if (cart == null || cart.Items == null)
+                    return NotFound(new { message = "Sepet zaten boş." });
+
+                _context.CartItems.RemoveRange(cart.Items);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Sepet başarıyla temizlendi." });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { message = "Sepet temizlenirken bir hata oluştu." });
+            }
+        }
+
     }
+
 }

@@ -24,6 +24,7 @@ function NavBar() {
     const [weather, setWeather] = useState(null);
     const [currentUser, setCurrentUser] = useState({});
     const { numberOfTicket } = useSelector((store) => store.userCart);
+    const [ticketCount, setTicketCount] = useState(0);
 
     const dispatch = useDispatch();
     const exit = () => {
@@ -60,6 +61,13 @@ function NavBar() {
         }
     }, [])
 
+    useEffect(() => {
+        if (numberOfTicket) {
+            setTicketCount(numberOfTicket);
+        }
+
+    }, [numberOfTicket])
+
 
 
     return (
@@ -72,7 +80,8 @@ function NavBar() {
                             <div className='navBarLeft'>
                                 <Link to={"/home"} style={{ textDecoration: "none" }}>
                                     <div className='navbarLogo'>
-                                        <img src="/images/logo97.png" alt="" width={128} height={64} />
+                                        <h2 className='navbarAppHeader'>MeetApp</h2>
+                                        {/* <img src="/images/logo97.png" alt="" width={128} height={64} /> */}
                                     </div>
                                 </Link>
                                 {address &&
@@ -100,7 +109,7 @@ function NavBar() {
                                                         vertical: "top",
                                                         horizontal: "left"
                                                     }}
-                                                    badgeContent={numberOfTicket} color='primary'>
+                                                    badgeContent={ticketCount} color='primary'>
                                                     <FaShoppingCart className='navbarCart' />
                                                 </Badge>
                                                 <span>Sepetim</span>
@@ -135,7 +144,7 @@ function NavBar() {
                                                 <span>Kullanıcılar</span>
                                             </div>
                                         </Link>
-                                        <Link className='navBarLinks'>
+                                        <Link to={"/admin/events"} className='navBarLinks'>
                                             <div className='navbarFavDiv'>
                                                 <IoMdSettings className='navbarFav' />
                                                 <span>Etkinlikler</span>

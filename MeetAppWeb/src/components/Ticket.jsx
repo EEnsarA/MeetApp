@@ -7,7 +7,7 @@ import { IoMdSend } from "react-icons/io";
 import { IoTicket } from "react-icons/io5";
 import { BsTicket } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
-import { addEventToUserCart } from '../redux/cartSlice';
+import { addEventToUserCart, calculateCart, clearCartAddedMessage, getUserCart } from '../redux/cartSlice';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { FaCircleMinus } from "react-icons/fa6";
@@ -24,6 +24,7 @@ function Ticket(props) {
 
     const [currentUser, setCurrentUser] = useState();
     const [count, setCount] = useState(0);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
 
 
     const [open, setOpen] = useState(false);
@@ -51,16 +52,19 @@ function Ticket(props) {
             "userId": userId,
             "eventId": eventId,
         }
-        dispatch(addEventToUserCart(addInfo));
+        dispatch(addEventToUserCart(addInfo)).then(() => {
+            dispatch(getUserCart(currentUser.nameid)).then(() => {
+                dispatch(calculateCart());
+            });
+        });
     }
 
     useEffect(() => {
         if (cartAddedMessage) {
+            setSnackbarMessage(cartAddedMessage)
             setOpen(true);
-        } else {
-            setOpen(false);
+            dispatch(clearCartAddedMessage());
         }
-        console.log(cartAddedMessage);
     }, [cartAddedMessage])
 
     return (
@@ -94,7 +98,6 @@ function Ticket(props) {
                 onClose={handleClose}
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 autoHideDuration={3000}
-                message={cartAddedMessage.message}
             >
                 <Alert
                     onClose={handleClose}
@@ -102,7 +105,7 @@ function Ticket(props) {
                     variant="filled"
                     sx={{ width: '100%' }}
                 >
-                    {cartAddedMessage.message}
+                    {snackbarMessage || "Hata oluştu."}
                 </Alert>
             </Snackbar>
         </>

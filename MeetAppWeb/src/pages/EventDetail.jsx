@@ -38,7 +38,7 @@ function EventDetail() {
                                 <span className='eventDetailEventName'>{event.eventName}</span>
                             </div>
                             <div className='eventDetailLocationDiv'>
-                                <Link style={{ textDecoration: "none" }}>s
+                                <Link style={{ textDecoration: "none" }}>
                                     <FaLocationDot size={12} /><span className='eventDetailLocationSpan'>{event.location}</span>
                                 </Link>
                                 <FaRegCalendar size={12} /><span className='eventDetailDateSpanHead'>{formatDateTimeTR(event.startDate)} - {formatDateTimeTR(event.endDate)}</span>

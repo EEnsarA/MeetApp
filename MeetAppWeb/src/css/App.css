@@ -1,6 +1,16 @@
 
-/* NavBar */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
+.app-content {
+  flex: 1;
+  padding-bottom: 2rem;
+}
+
+/* NavBar */
 
 .navBar{
     padding: 10px;
@@ -14,6 +24,11 @@
     background-color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     
+}
+.navbarAppHeader{
+    font-size: 28px;
+    font-family: "Sour Gummy",sans-serif;
+    color: #014d57;
 }
 .navbarHr{
     margin-top: 1rem;
@@ -220,9 +235,9 @@
 .homeCatHeader{
     text-decoration: none;
     color: #000000;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 500;
-    font-family:"Funnel Display" , sans-serif;
+    font-family:"Sour Gummy" , sans-serif;
 }
 .homeCatHeader:hover{
     color: #00798A;
@@ -257,47 +272,91 @@
 /* Footer */
 
 .footerDiv{
+    /* margin-top: 2rem; */
     display: flex;
     width: 100%;
-    height: 300px;
+    height: 200px;
     background-color: #212121;
     color: #ffffff;
 }
-
+.footerMainDiv{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 1rem;
+}
+.footerGitLink{
+    text-decoration: none;
+    color: #fff;
+}
+.footerGitLink:hover{
+    color:#047e8e
+}
+.footerGitDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.footerInfoDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.footerAppName{
+    font-size: 16px;
+    font-family: "Funnel Display",sans-serif;
+    margin-bottom: 1rem;
+}
+.footerInfoSpan{
+    font-size: 14px;
+    font-family: "Funnel Display",sans-serif;
+    margin-bottom: 1rem;
+}
 /* LoginPage */
 
+
 .loginPage{
-    background-color:#fff;
+    background-color:#F2F2F2;;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 80vh;
     padding: 10px;
+    margin-top: 5rem;
+}
+.loginMainDiv{
+    background-color: #F2F2F2;
+    height: 800px;
+    width: 100%;
+    border:none;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    display: flex;
+    flex-direction: row;
+    padding: 14px;
+    border-radius: 10px;
 }
 
 .loginDiv{
-    padding: 20px;
-    min-height: 600px;
-    border:none;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    padding: 1rem;
 }
 
 .loginSlogan{
-    margin-left: 1.2rem;
-    color:#014d57;
-    font-weight: 500;
-    /* font-style: italic; */
-    font-family: "Damion" , sans-serif;
-    font-size: 40px;    
-    opacity: 1;
-    cursor: pointer;
+    width: 140px;
+    height: 50px;
+}
+.logoImg{
+    width: 100%;
+    height: 780px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.loginRightSide{
+    padding: 1rem;
+    height: 100%;
 }
 .loginSloganDiv{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 100px;
+    width: 240px;
+    height: 80px;
+    padding: 1rem;
 }
 .logoDiv{
     display: flex;
@@ -401,6 +460,7 @@
     border: none;
     border-top: 1px solid #2a2a2a;
 }
+
 .registerError{
     color: #e64e41;
     font-size: 12px;
@@ -497,6 +557,7 @@
     font-family: "Sour Gummy",sans-serif;
     color: #014d57;
 }
+
 .bannerSpan{
     font-size: 18px;
     font-family: "Funnel Display",sans-serif;
@@ -799,6 +860,7 @@
     margin-right: 2rem;
     font-size: 16px;
     font-family: "Funnel Display" , sans-serif;
+    color: #014d57;
 }
 .cartDateSpan{
     margin-left: 6px;
@@ -858,12 +920,13 @@
     }
 }
 .cartEventPayMainDiv{
+    margin-left: 1rem;
     color: #212121;
     display: flex;
     flex-direction: column;
     position: relative;
     max-width: 400px;
-    height: 420px;
+    min-height: 420px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 4px;
 }
@@ -885,7 +948,7 @@
     height: 20px;
 }
 .cartEventBuyButton{
-    margin-top: 5rem;
+    margin-top: 2rem;
     text-decoration: none;
     width: 100%;
     background-color: #00798A;
@@ -901,6 +964,31 @@
 }
 .cartEventBuyButton:hover{
     background-color: #028b9d;
+}
+.cartEventContinueButton{
+    margin-top: 8px;
+    text-decoration: none;
+    width: 100%;
+    color:#0e8292;
+    border: 1px solid #0d555e;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;    
+    font-weight: 500;
+    font-family: "Funnel Display" , sans-serif;
+    height: 38px;
+    border-radius: 6px;
+}
+.cartEventContinueButton:hover{
+    border: 2px solid #0d555e;
+}
+.cartEventBuySummary{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-radius: 8px;
 }
 
 
@@ -1014,4 +1102,25 @@
     height: 30px;
     cursor: pointer;
     color: #00798A;
+}
+
+
+.buyCancelButton{
+    margin-top: 2rem;
+    text-decoration: none;
+    width: 120px;
+    height: 90px;
+    background-color:#b23024;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;    
+    font-weight: 500;
+    font-family: "Funnel Display" , sans-serif;
+    height: 32px;
+    border-radius: 8px;
+    color: #ffffff;
+}
+.buyCancelButton:hover{
+    background-color: rgba(192, 8, 4, 0.843)
 }

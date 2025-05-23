@@ -5,7 +5,8 @@ import axios from "axios"
 
 const USER_CART = "http://localhost:5134/api/Carts";
 const USER_CART_GET = "http://localhost:5134/api/Carts/byUserId";
-
+const UPDATE_EVENT_TICKETS = "http://localhost:5134/api/Carts/updateTickets"
+const CLEAR_USER_CART = "http://localhost:5134/api/Carts/clearCart"
 
 const initialState = {
     userCart: null,
@@ -13,6 +14,8 @@ const initialState = {
     errMessage: "",
     cartAddedMessage: "",
     cartRemovedMessage: "",
+    ticketUpdateMessage: "",
+    clearCartMessage: "",
     amountCart: 0,
     numberOfTicket: 0,
 }
@@ -49,6 +52,28 @@ export const removeEventFromUserCart = createAsyncThunk("removeCart", async (rem
     }
 });
 
+export const updateEventTickets = createAsyncThunk("updateTickets", async (ticketsInfo, thunkAPI) => {
+    try {
+        const response = await axios.post(UPDATE_EVENT_TICKETS, ticketsInfo);
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        console.log(err.message);
+        return thunkAPI.rejectWithValue(err.response?.data || "Sunucu hatası");
+    }
+})
+
+export const clearUserCart = createAsyncThunk("clearCart", async (userId, thunkAPI) => {
+    try {
+        const response = await axios.post(CLEAR_USER_CART + "/" + userId);
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        console.log(err.message);
+        return thunkAPI.rejectWithValue(err.response?.data || "Sunucu hatası");
+    }
+});
+
 const cartSlice = createSlice({
     name: "cart",
     initialState,
@@ -62,6 +87,12 @@ const cartSlice = createSlice({
             })
 
         },
+        clearCartRemovedMessage: (state) => {
+            state.cartRemovedMessage = null;
+        },
+        clearCartAddedMessage: (state) => {
+            state.cartAddedMessage = null;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -81,7 +112,7 @@ const cartSlice = createSlice({
             })
             .addCase(addEventToUserCart.fulfilled, (state, action) => {
                 state.loading = false;
-                state.cartAddedMessage = action.payload;
+                state.cartAddedMessage = action.payload.message;
             })
             .addCase(addEventToUserCart.rejected, (state, action) => {
                 state.loading = false;
@@ -92,14 +123,37 @@ const cartSlice = createSlice({
             })
             .addCase(removeEventFromUserCart.fulfilled, (state, action) => {
                 state.loading = false;
-                state.cartRemovedMessage = action.payload;
+                state.cartRemovedMessage = action.payload.message;
             })
             .addCase(removeEventFromUserCart.rejected, (state, action) => {
                 state.loading = false;
                 state.errMessage = action.payload;
             })
+            .addCase(updateEventTickets.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(updateEventTickets.fulfilled, (state, action) => {
+                state.loading = false;
+                state.ticketUpdateMessage = action.payload;
+            })
+            .addCase(updateEventTickets.rejected, (state, action) => {
+                state.loading = false;
+                state.errMessage = action.payload;
+            })
+            .addCase(clearUserCart.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(clearUserCart.fulfilled, (state, action) => {
+                state.loading = false;
+                state.clearCartMessage = action.payload;
+            })
+            .addCase(clearUserCart.rejected, (state, action) => {
+                state.loading = false;
+                state.errMessage = action.payload;
+            })
+
     }
 })
 
-export const { calculateCart } = cartSlice.actions;
+export const { calculateCart, clearCartAddedMessage, clearCartRemovedMessage } = cartSlice.actions;
 export default cartSlice.reducer;
