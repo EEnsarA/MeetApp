@@ -850,6 +850,33 @@ namespace MeetAppApi.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MeetAppApi.Models.Notice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("NoticeDetail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NoticeHeader")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Notices");
+                });
+
             modelBuilder.Entity("MeetAppApi.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -888,6 +915,9 @@ namespace MeetAppApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isApproved")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -896,38 +926,54 @@ namespace MeetAppApi.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedTime = new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8579),
+                            CreatedTime = new DateTime(2025, 5, 25, 13, 5, 53, 215, DateTimeKind.Local).AddTicks(6987),
                             Email = "ensar.atc@gmail.com",
                             FirstName = "Ensar",
-                            HashedPassword = "$2a$11$cwkK02UIhQXib9gB3Oa18eg5co2Jtc.t0NYLiS7rS5fvEn4JZIl9m",
+                            HashedPassword = "$2a$11$91ObbmWqsRse4uDtzwK7.uHrJ.wAjTBWr8l9F.7OECiVhIB8bKJ.G",
                             LastName = "Atıcı",
                             Location = "Erzincan/TR",
                             Role = 1,
-                            UserName = "ensaratc_"
+                            UserName = "ensaratc_",
+                            isApproved = true
                         },
                         new
                         {
                             Id = 2,
-                            CreatedTime = new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8595),
+                            CreatedTime = new DateTime(2025, 5, 25, 13, 5, 53, 215, DateTimeKind.Local).AddTicks(7005),
                             Email = "john@hotmail.com",
                             FirstName = "John",
-                            HashedPassword = "$2a$11$uTpS5jUdyDpHfy6EpXim1.tuSMF3nWK8K0NO9w.mdzNln5FrQrDoq",
+                            HashedPassword = "$2a$11$cIzyBu8SRn2XD4m7IWh2NOCtckBdG61.D6K7do14p9kOKQ4DAtJA.",
                             LastName = "Doe",
                             Location = "Washington/US",
                             Role = 0,
-                            UserName = "john_doe"
+                            UserName = "john_doe",
+                            isApproved = true
                         },
                         new
                         {
                             Id = 3,
-                            CreatedTime = new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8597),
+                            CreatedTime = new DateTime(2025, 5, 25, 13, 5, 53, 215, DateTimeKind.Local).AddTicks(7007),
                             Email = "yıldız@gmail.com",
                             FirstName = "Ahmet",
-                            HashedPassword = "$2a$11$IUlDUwxm3cNcESYQ6mDSKuV23Z/XBOThCYiIKRShx//YjgzmvNA9m",
+                            HashedPassword = "$2a$11$sc6gy7IJnxNyaeeQSsw.ROEnrDelDKQIYSmGmsUSMKpBN7YV/R2/i",
                             LastName = "Yıldız",
                             Location = "Ankara/TR",
                             Role = 0,
-                            UserName = "Yıldız_1903"
+                            UserName = "Yıldız_1903",
+                            isApproved = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedTime = new DateTime(2025, 5, 25, 13, 5, 53, 215, DateTimeKind.Local).AddTicks(7009),
+                            Email = "alperen@gmail.com",
+                            FirstName = "Alperen",
+                            HashedPassword = "$2a$11$Zu2JVN2.9oN0zHUjj7JCu.0d9yd4KHxWlRJCPHXaDW/S5qRkTNk7y",
+                            LastName = "Şengün",
+                            Location = "Giresun/TR",
+                            Role = 0,
+                            UserName = "alpi",
+                            isApproved = false
                         });
                 });
 
@@ -999,6 +1045,17 @@ namespace MeetAppApi.Migrations
                     b.Navigation("Event");
                 });
 
+            modelBuilder.Entity("MeetAppApi.Models.Notice", b =>
+                {
+                    b.HasOne("MeetAppApi.Models.User", "User")
+                        .WithOne("Notice")
+                        .HasForeignKey("MeetAppApi.Models.Notice", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MeetAppApi.Models.Cart", b =>
                 {
                     b.Navigation("Items");
@@ -1020,6 +1077,8 @@ namespace MeetAppApi.Migrations
                 {
                     b.Navigation("Cart")
                         .IsRequired();
+
+                    b.Navigation("Notice");
                 });
 #pragma warning restore 612, 618
         }

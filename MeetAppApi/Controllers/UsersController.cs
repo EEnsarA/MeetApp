@@ -106,12 +106,13 @@ namespace MeetAppApi.Controllers
                 {
                     FirstName = registerDto.FirstName,
                     LastName = registerDto.LastName,
-                    UserName = registerDto.UserName,    
+                    UserName = registerDto.UserName,
                     Email = registerDto.Email,
                     HashedPassword = PasswordHasher.HashPassword(registerDto.Password),
                     Location = registerDto.Location,
                     CreatedTime = DateTime.UtcNow,
                     Role = Role.User,
+                    isApproved = false,
                 };
 
                 var users = await _context.Users.Where(u => u.Email == registerDto.Email || u.UserName == registerDto.UserName).FirstOrDefaultAsync();
@@ -142,6 +143,7 @@ namespace MeetAppApi.Controllers
         }
 
 
+
         //http://localhost:5134/api/Users/login
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
@@ -161,8 +163,12 @@ namespace MeetAppApi.Controllers
                 if (user == null)
                     return BadRequest(new { message = "Kullanıcı bulunamadı." });
 
+
                 if (!PasswordHasher.VerifyPassword(loginDto.Password, user.HashedPassword))
                     return BadRequest(new { message = "Şifre hatalı." });
+
+                if (user.isApproved == false && user.Role == Role.User)
+                    return BadRequest(new { message = "Admin onayı bekleniyor." });
 
                 var token = _jwtHandler.GenerateJWT(user);
                 return Ok(new { token });
@@ -173,7 +179,23 @@ namespace MeetAppApi.Controllers
             }
         }
 
+        //http://localhost:5134/api/Users/approve
+        [HttpPut("approve")]
+        public async Task<IActionResult> ApproveUser([FromBody] UserApprovalDto approvalDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(new { message = "Geçersiz veri." });
 
+            var user = await _context.Users.FindAsync(approvalDto.UserId);
+
+            if (user == null)
+                return NotFound(new { message = "Kullanıcı bulunamadı." });
+
+            user.isApproved = approvalDto.IsApproved;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = $"Kullanıcı {(approvalDto.IsApproved ? "onaylandı" : "reddedildi")}." });
+        }
 
 
     }

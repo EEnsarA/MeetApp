@@ -49,6 +49,13 @@ namespace MeetAppApi.Context
                 .WithOne(ci => ci.Event)
                 .HasForeignKey(ci => ci.EventId);
 
+            // One To One USER-NOTICE  
+            modelBuilder.Entity<User>()
+            .HasOne(u => u.Notice)
+            .WithOne(n => n.User)
+            .HasForeignKey<Notice>(n => n.UserId)
+            .OnDelete(DeleteBehavior.Cascade);  // Kullanıcı sillinirse notice de silinir !
+
 
 
             // -- Seed Data
@@ -78,6 +85,8 @@ namespace MeetAppApi.Context
         public DbSet<Cart> Carts { get; set; }
 
         public DbSet<CartItem> CartItems { get; set; }
+
+        public DbSet<Notice> Notices { get; set; }
 
 
     }

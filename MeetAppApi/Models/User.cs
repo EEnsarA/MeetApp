@@ -26,12 +26,16 @@
 
         public string HashedPassword { get; set; } = default!;
 
+        public bool isApproved { get; set; }
+
         public DateTime CreatedTime { get; set; }
 
         public Role Role { get; set; } = Role.User;
 
         // Navigation Properties
         public Cart Cart { get; set; } = default!;
+
+        public Notice? Notice { get; set; }
 
 
     }

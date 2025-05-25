@@ -10,8 +10,6 @@ namespace MeetAppApi.Dtos
 
         [Required(ErrorMessage ="Şifre zorunludur.")]
         public string Password { get; set; } = default!;
-
-        
         
     }
 }

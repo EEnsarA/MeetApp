@@ -27,6 +27,7 @@ import {
 import { addEvent, getEventById, updateEvent } from '../redux/eventSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { eventUpdateFormSchema } from '../schemas/EventUpdateFormSchema';
+import { getWeather } from '../hooks/getWeather';
 
 
 function AdminEventUpdatePage() {
@@ -36,7 +37,7 @@ function AdminEventUpdatePage() {
     const { categories, loading, errMessage } = useSelector((store) => store.categoryList);
     const { event, updatedEvent } = useSelector((store) => store.eventList);
     const [allCategories, setAllCategories] = useState([]);
-
+    const [weather, setWeather] = useState(null);
 
     const params = useParams();
     const eventId = params.eventId;
@@ -87,6 +88,8 @@ function AdminEventUpdatePage() {
         }
     }, [])
 
+
+
     useEffect(() => {
         if (event) {
             setFieldValue("eventName", event.eventName || "");
@@ -126,7 +129,22 @@ function AdminEventUpdatePage() {
     });
 
 
+    useEffect(() => {
+        if (values.city) {
 
+            const fetchWeather = async () => {
+                try {
+                    const weatherData = await getWeather(values.city);
+                    console.log(weatherData)
+                    setWeather(weatherData);
+                } catch (err) {
+                    console.error("Hava durumu alınamadı:", err);
+                    setWeather(null);
+                }
+            };
+            fetchWeather();
+        }
+    }, [values.city]);
 
 
 
@@ -157,7 +175,47 @@ function AdminEventUpdatePage() {
                 <Container maxWidth="xl">
                     <form onSubmit={handleSubmit}>
                         <div>
-                            <h2>Etkinlik Ekle / Düzenle</h2>
+                            <div style={{ display: "flex", justifyContent: "space-between", maxHeight: "220px", padding: "12px" }}>
+                                <div>
+                                    <h2>Etkinlik Düzenle</h2>
+                                </div>
+                                <div>
+                                    {weather && weather.success && (
+                                        <>
+                                            <h3>{weather.city} için 5 günlük hava durumu böyle </h3>
+                                            {weather && weather.success && (
+                                                <div style={{ display: "flex", flexDirection: "row", gap: "1rem", marginTop: "1rem" }}>
+                                                    {weather.result.slice(0, 5).map((day, index) => (
+                                                        <div
+                                                            key={index}
+                                                            style={{
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                gap: "1rem",
+                                                                padding: "1rem",
+                                                                border: "1px solid #ddd",
+                                                                borderRadius: "8px",
+                                                                backgroundColor: "#f9f9f9"
+                                                            }}
+                                                        >
+                                                            <img
+                                                                src={day.icon}
+                                                                alt={day.description}
+                                                                style={{ width: 48, height: 48 }}
+                                                            />
+                                                            <div style={{ display: "flex", flexDirection: "column" }}>
+                                                                <div><strong>{day.day} - {day.date}</strong></div>
+                                                                <div>{day.description}</div>
+                                                                <div><strong>{day.degree}°C</strong></div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                            </div>
                             <div style={{ padding: "1rem" }}>
                                 <TextField
                                     label="Etkinlik İsmi"

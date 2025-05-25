@@ -16,15 +16,37 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import Banner from '../components/Banner';
 import { getAllEvents } from '../redux/eventSlice';
 import { customContainer } from '../helpers/customWidgets';
+import Notice from '../components/Notice';
+import { getNotices } from '../redux/authSlice';
+import { FaLocationDot } from "react-icons/fa6";
 
 function HomePage() {
 
   const dispatch = useDispatch();
   const { events, event, loading, errMessage } = useSelector((store) => store.eventList);
-
+  const { notices } = useSelector((store) => store.authInfo)
   const [currentUser, setCurrentUser] = useState({});
+  const [address, setAddress] = useState(null);
 
   useEffect(() => {
+
+
+    const fetchData = async () => {
+      try {
+        const { address } = await getLocation();
+        setAddress(address);
+
+        // if (address?.locality) {
+        //     const weatherData = await getWeather(address.locality);
+        //     setWeather(weatherData);
+        // }
+      }
+      catch (err) {
+        console.log("Konum yada hava durumu alınamadı", err);
+      }
+    };
+    fetchData();
+    // console.log(weather.result[0]);
     if (sessionStorage.getItem("current_user")) {
       const sessionUser = JSON.parse(sessionStorage.getItem("current_user"));
       const parsedUser = {
@@ -41,6 +63,13 @@ function HomePage() {
 
   }, [events])
 
+  useEffect(() => {
+    dispatch(getNotices())
+  }, [])
+
+  useEffect(() => {
+    console.log(notices)
+  }, [notices])
 
 
   useGSAP(() => {
@@ -70,18 +99,30 @@ function HomePage() {
       <NavBar />
       <ThemeProvider theme={customContainer}>
         <Container maxWidth="xl">
-          <div style={{ marginTop: "2rem", padding: "10px", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-            <div className='homeSloganDiv'>
-              {currentUser.role == "Admin" ?
-                <span className='homeSlogan' id='homeSlogan'>
-                  Hoşgeldin Admin !
-                </span>
-                :
-                <span className='homeSlogan' id='homeSlogan'>
-                  Hoşgeldin {currentUser.fullName} !
-                </span>
-              }
-
+          <div className='homeLeftDiv'>
+            <div>
+              <div className='homeSloganDiv'>
+                {currentUser.role == "Admin" ?
+                  <span className='homeSlogan' id='homeSlogan'>
+                    Hoşgeldin Admin !
+                  </span>
+                  :
+                  <span className='homeSlogan' id='homeSlogan'>
+                    Hoşgeldin {currentUser.fullName} !
+                  </span>
+                }
+                {address &&
+                  <div className='homeLocationDiv'>
+                    <div className='homeLocationButton'>
+                      <FaLocationDot className='homeLocationIcon' />
+                      <span className='homeLocationSpan'>{address.locality} / {address.countryCode}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+              <div>
+                <Notice notices={notices[0]} />
+              </div>
             </div>
             <HomeImgSlider />
           </div>

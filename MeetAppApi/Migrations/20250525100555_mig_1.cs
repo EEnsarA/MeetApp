@@ -63,6 +63,7 @@ namespace MeetAppApi.Migrations
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HashedPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isApproved = table.Column<bool>(type: "bit", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Role = table.Column<int>(type: "int", nullable: false)
                 },
@@ -108,6 +109,27 @@ namespace MeetAppApi.Migrations
                     table.PrimaryKey("PK_Carts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Carts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NoticeHeader = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NoticeDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notices_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -217,12 +239,13 @@ namespace MeetAppApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreatedTime", "Email", "FirstName", "HashedPassword", "LastName", "Location", "Role", "UserName" },
+                columns: new[] { "Id", "CreatedTime", "Email", "FirstName", "HashedPassword", "LastName", "Location", "Role", "UserName", "isApproved" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8579), "ensar.atc@gmail.com", "Ensar", "$2a$11$cwkK02UIhQXib9gB3Oa18eg5co2Jtc.t0NYLiS7rS5fvEn4JZIl9m", "Atıcı", "Erzincan/TR", 1, "ensaratc_" },
-                    { 2, new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8595), "john@hotmail.com", "John", "$2a$11$uTpS5jUdyDpHfy6EpXim1.tuSMF3nWK8K0NO9w.mdzNln5FrQrDoq", "Doe", "Washington/US", 0, "john_doe" },
-                    { 3, new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8597), "yıldız@gmail.com", "Ahmet", "$2a$11$IUlDUwxm3cNcESYQ6mDSKuV23Z/XBOThCYiIKRShx//YjgzmvNA9m", "Yıldız", "Ankara/TR", 0, "Yıldız_1903" }
+                    { 1, new DateTime(2025, 5, 25, 13, 5, 53, 215, DateTimeKind.Local).AddTicks(6987), "ensar.atc@gmail.com", "Ensar", "$2a$11$91ObbmWqsRse4uDtzwK7.uHrJ.wAjTBWr8l9F.7OECiVhIB8bKJ.G", "Atıcı", "Erzincan/TR", 1, "ensaratc_", true },
+                    { 2, new DateTime(2025, 5, 25, 13, 5, 53, 215, DateTimeKind.Local).AddTicks(7005), "john@hotmail.com", "John", "$2a$11$cIzyBu8SRn2XD4m7IWh2NOCtckBdG61.D6K7do14p9kOKQ4DAtJA.", "Doe", "Washington/US", 0, "john_doe", true },
+                    { 3, new DateTime(2025, 5, 25, 13, 5, 53, 215, DateTimeKind.Local).AddTicks(7007), "yıldız@gmail.com", "Ahmet", "$2a$11$sc6gy7IJnxNyaeeQSsw.ROEnrDelDKQIYSmGmsUSMKpBN7YV/R2/i", "Yıldız", "Ankara/TR", 0, "Yıldız_1903", true },
+                    { 4, new DateTime(2025, 5, 25, 13, 5, 53, 215, DateTimeKind.Local).AddTicks(7009), "alperen@gmail.com", "Alperen", "$2a$11$Zu2JVN2.9oN0zHUjj7JCu.0d9yd4KHxWlRJCPHXaDW/S5qRkTNk7y", "Şengün", "Giresun/TR", 0, "alpi", false }
                 });
 
             migrationBuilder.InsertData(
@@ -337,6 +360,12 @@ namespace MeetAppApi.Migrations
                 name: "IX_EventCategories_CategoryId",
                 table: "EventCategories",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notices_UserId",
+                table: "Notices",
+                column: "UserId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -350,6 +379,9 @@ namespace MeetAppApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "EventCategories");
+
+            migrationBuilder.DropTable(
+                name: "Notices");
 
             migrationBuilder.DropTable(
                 name: "Carts");

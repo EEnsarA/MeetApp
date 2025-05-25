@@ -111,7 +111,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content:flex-start;
+    justify-content:space-between;
 }
 .navbarLogo{
     display: flex;
@@ -141,7 +141,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 5rem;
+    margin-right: 5rem;
 }
 .searchBarDiv:hover{
     border: 1.5px solid #00798A;
@@ -171,13 +171,23 @@
 
 /* HomePage */
 
+.homeLeftDiv{
+    margin-top: 1.5rem;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .homeSloganDiv{
-    padding-left: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     max-width: 600px;
 }
 .homeSlogan{
-    font-weight: 400;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-family:"Sour Gummy" ,sans-serif;
     font-size: 24px;
     opacity: 0;
     cursor: pointer;
@@ -584,6 +594,28 @@
     background-color: #028b9d;
 }   
 
+/*Notice*/
+.noticeTextDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.noticeHeader{
+    font-size: 26px;
+    font-family: "Sour Gummy",sans-serif;
+    color: #014d57;
+}
+
+.noticeSpan{
+    font-size: 18px;
+    font-family: "Funnel Display",sans-serif;
+    font-weight: 400;
+    line-height: 2rem;
+}
+.noticeMainDiv{
+    padding: 1rem;
+}
 
 /* Event Detail */
 .eventDetailMainDiv{
@@ -1017,7 +1049,9 @@
     .loginLogo{
         display: none;
     }
+
 }
+
 
 @media screen and (max-width:750px){
     .searchBarInput{
@@ -1028,6 +1062,26 @@
 @media screen and (max-width:1000px){
     .searchBarInput{
         width: 250px;
+    }
+    .noticeMainDiv {
+        display: none !important;
+    }
+}
+@media screen and (max-width:1500px){
+    .noticeMainDiv {
+        display: none !important;
+    }
+    .homeSloganDiv{
+        margin-bottom: 1rem;
+    }
+    .homeLeftDiv{
+        flex-direction: column;
+    }
+    .searchBarInput{
+        width: 250px;
+    }
+    .searchBarDiv{
+        margin-right: 12rem;
     }
 }
 

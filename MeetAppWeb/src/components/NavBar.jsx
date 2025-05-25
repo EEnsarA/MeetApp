@@ -20,7 +20,6 @@ import { customContainer } from '../helpers/customWidgets';
 
 function NavBar() {
 
-    const [address, setAddress] = useState(null);
     const [weather, setWeather] = useState(null);
     const [currentUser, setCurrentUser] = useState({});
     const { numberOfTicket } = useSelector((store) => store.userCart);
@@ -33,22 +32,6 @@ function NavBar() {
     }
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { address } = await getLocation();
-                setAddress(address);
-
-                // if (address?.locality) {
-                //     const weatherData = await getWeather(address.locality);
-                //     setWeather(weatherData);
-                // }
-            }
-            catch (err) {
-                console.log("Konum yada hava durumu alınamadı", err);
-            }
-        };
-        fetchData();
-        // console.log(weather.result[0]);
 
         if (sessionStorage.getItem("current_user")) {
             const sessionUser = JSON.parse(sessionStorage.getItem("current_user"));
@@ -84,14 +67,6 @@ function NavBar() {
                                         {/* <img src="/images/logo97.png" alt="" width={128} height={64} /> */}
                                     </div>
                                 </Link>
-                                {address &&
-                                    <div className='homeLocationDiv'>
-                                        <div className='homeLocationButton'>
-                                            <FaLocationDot className='homeLocationIcon' />
-                                            <span className='homeLocationSpan'>{address.locality} / {address.countryCode}</span>
-                                        </div>
-                                    </div>
-                                }
                                 <div className='searchBarDiv'>
                                     <input className="searchBarInput" type="text" placeholder='Etkinlik arayın..' />
                                     <Link><IoSearch className='searchBarIcon' /></Link>

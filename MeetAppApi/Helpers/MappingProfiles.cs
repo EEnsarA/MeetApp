@@ -23,6 +23,8 @@ namespace MeetAppApi.Helpers
             CreateMap<EventDto, AddEventDto>();
             CreateMap<EventDto, UpdateEventDto>();
             CreateMap<UpdateEventDto, EventDto>();
+            CreateMap<Notice,NoticeDto>();
+            CreateMap<NoticeDto,Notice>();
 
         }    
     }

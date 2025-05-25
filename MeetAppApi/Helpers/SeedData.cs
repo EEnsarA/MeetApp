@@ -8,11 +8,12 @@ namespace MeetAppApi.Helpers
         public static List<User> CreateUser()
         {
 
-            var userData = new (int id, string firstName, string lastName, string userName, string email, string rawPassword, string location, Role role, DateTime createdTime)[]
+            var userData = new (int id, string firstName, string lastName, string userName, string email, string rawPassword,bool isApproved ,string location, Role role, DateTime createdTime)[]
             {
-                (1,"Ensar","Atıcı","ensaratc_","ensar.atc@gmail.com","ensar123","Erzincan/TR",Role.Admin,DateTime.Now),
-                (2,"John","Doe","john_doe","john@hotmail.com","john123","Washington/US",Role.User,DateTime.Now),
-                (3,"Ahmet","Yıldız","Yıldız_1903","yıldız@gmail.com","yıldız123","Ankara/TR",Role.User,DateTime.Now),
+                (1,"Ensar","Atıcı","ensaratc_","ensar.atc@gmail.com","ensar123",true,"Erzincan/TR",Role.Admin,DateTime.Now),
+                (2,"John","Doe","john_doe","john@hotmail.com","john123",true,"Washington/US",Role.User,DateTime.Now),
+                (3,"Ahmet","Yıldız","Yıldız_1903","yıldız@gmail.com","yıldız123",true,"Ankara/TR",Role.User,DateTime.Now),
+                (4,"Alperen","Şengün","alpi","alperen@gmail.com","alperen123",false,"Giresun/TR",Role.User,DateTime.Now)
             };
 
 
@@ -25,6 +26,7 @@ namespace MeetAppApi.Helpers
                 UserName = u.userName,
                 Email = u.email,
                 HashedPassword = PasswordHasher.HashPassword(u.rawPassword),
+                isApproved = u.isApproved,
                 Location = u.location,
                 Role = u.role,
                 CreatedTime = u.createdTime,

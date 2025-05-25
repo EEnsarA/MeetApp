@@ -6,17 +6,24 @@ const REGISTER = "http://localhost:5134/api/Users/register";
 const LOGIN = "http://localhost:5134/api/Users/login";
 const USER_GET = "http://localhost:5134/api/Users";
 
+const NOTICE_GET = "http://localhost:5134/api/Notice"
+
+const APPROVE = "http://localhost:5134/api/Users/approve"
+
 
 const token = sessionStorage.getItem("token");
 const user = token ? jwtDecode(token) : null;
 
 const initialState = {
+    notices: [],
     users: [],
     registeredUser: null,
     errMessage: "",
     loading: false,
     currentUser: user ?? null,
     token: token ?? null,
+    approvedMessage: "",
+    deletedUser: null
 }
 
 export const register = createAsyncThunk("register", async (userInfo, { rejectWithValue }) => {
@@ -53,6 +60,41 @@ export const getAllUsers = createAsyncThunk("users", async (_, thunkAPI) => {
     }
 });
 
+export const getNotices = createAsyncThunk("notices", async (_, thunkAPI) => {
+    try {
+        const response = await axios(NOTICE_GET);
+        return response.data;
+
+    } catch (err) {
+        console.log(err.message);
+        return thunkAPI.rejectWithValue(err.response?.data || "Sunucu hatası");
+    }
+});
+
+export const deleteUser = createAsyncThunk("deleteUser", async (userId, thunkAPI) => {
+    try {
+        const response = await axios.delete(USER_GET + "/" + userId);
+        return response.data;
+    }
+    catch (err) {
+        console.log(err.message);
+        return thunkAPI.rejectWithValue(err.response?.data || "Etkinlik bulunamadı");
+    }
+})
+
+
+export const approveUser = createAsyncThunk("approve", async (approveInfo, thunkAPI) => {
+    try {
+        const response = await axios.put(APPROVE, approveInfo);
+        return response.data;
+
+    } catch (err) {
+        console.log(err.message);
+        return thunkAPI.rejectWithValue(err.response?.data || "Sunucu hatası");
+    }
+
+})
+
 
 
 
@@ -67,9 +109,13 @@ const authSlice = createSlice({
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("current_user");
 
+        },
+        clearApprovedMessage: (state) => {
+            state.approvedMessage = null;
+        },
+        clearDeletedUser: (state) => {
+            state.deletedUser = null;
         }
-
-
     },
     extraReducers: (builder) => {
         builder
@@ -110,8 +156,41 @@ const authSlice = createSlice({
                 state.errMessage = action.payload;
                 state.loading = false;
             })
+            .addCase(getNotices.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getNotices.fulfilled, (state, action) => {
+                state.loading = false;
+                state.notices = action.payload;
+            })
+            .addCase(getNotices.rejected, (state, action) => {
+                state.errMessage = action.payload;
+                state.loading = false;
+            })
+            .addCase(approveUser.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(approveUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.approvedMessage = action.payload;
+            })
+            .addCase(approveUser.rejected, (state, action) => {
+                state.errMessage = action.payload;
+                state.loading = false;
+            })
+            .addCase(deleteUser.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(deleteUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.deletedUser = action.payload;
+            })
+            .addCase(deleteUser.rejected, (state, action) => {
+                state.errMessage = action.payload;
+                state.loading = false;
+            })
     }
 })
 
-export const { logout } = authSlice.actions;
+export const { logout, clearApprovedMessage, clearDeletedUser } = authSlice.actions;
 export default authSlice.reducer;

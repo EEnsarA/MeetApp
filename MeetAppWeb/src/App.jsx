@@ -14,6 +14,7 @@ import AdminEventPage from './pages/AdminEventPage'
 import AdminUserPage from './pages/AdminUserPage'
 import AdminEventAddPage from './pages/AdminEventAddPage'
 import AdminEventUpdatePage from './pages/AdminEventUpdatePage'
+import LoadingBackDrop from './components/LoadingBackDrop'
 
 
 
@@ -34,6 +35,7 @@ function App() {
 
   return (
     <>
+      <LoadingBackDrop />
       <div className='app-wrapper'>
         <div className='app-content'>
           <Routes>

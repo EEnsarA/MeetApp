@@ -8,6 +8,7 @@ namespace MeetAppApi.Dtos
 
         public string? UserName { get; set; }
 
+
         public string? FirstName { get; set; }
 
         public string? LastName { get; set; }
@@ -19,6 +20,8 @@ namespace MeetAppApi.Dtos
         public string? Location { get; set; }
 
         public string? HashedPassword { get; set; }
+
+        public bool IsApproved { get; set; }
 
         public DateTime? CreatedTime { get; set; }
 
