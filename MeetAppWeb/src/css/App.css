@@ -26,6 +26,7 @@
     
 }
 .navbarAppHeader{
+    margin-left: 1.5rem;
     font-size: 28px;
     font-family: "Sour Gummy",sans-serif;
     color: #014d57;
@@ -326,7 +327,6 @@
 
 
 .loginPage{
-    background-color:#F2F2F2;;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -389,6 +389,8 @@
     padding: 10px;
     font-weight: 500;
 }
+
+
 
 .emailDiv{
     display: flex;
@@ -1085,6 +1087,23 @@
     }
 }
 
+@media screen and (max-width : 1750px){
+    .loginMainDiv{
+        height: 700px;
+    }
+    .logoImg{
+        height: 650px;
+    }
+    .registerInputDiv{
+        margin-top: 1rem;
+    }
+    .loginPage{
+        margin-top: 1rem;
+    }
+    .navbarLogo{
+        margin-left: 1rem;
+    }
+}   
 
 
 

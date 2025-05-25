@@ -157,7 +157,7 @@ function AdminEventAddPage() {
         <>
             <NavBar />
             <ThemeProvider theme={customContainer}>
-                <Container maxWidth="xl">
+                <Container maxWidth="xg">
                     <form onSubmit={handleSubmit}>
                         <div>
                             <div style={{ display: "flex", justifyContent: "space-between", maxHeight: "220px", padding: "12px" }}>

@@ -76,8 +76,8 @@ function AdminEventPage() {
         <>
             <NavBar />
             <ThemeProvider theme={customContainer}>
-                <Container maxWidth="xl">
-                    <TableContainer component={Paper} sx={{ mt: 5, maxHeight: 900 }}>
+                <Container maxWidth="xg">
+                    <TableContainer component={Paper} sx={{ mt: 5, maxHeight: 650 }}>
                         <Table stickyHeader>
                             <TableHead>
                                 <TableRow sx={{ backgroundColor: '#2a2a2a' }}>
@@ -86,11 +86,11 @@ function AdminEventPage() {
                                         { label: 'Etkinlik Adı', width: 150 },
                                         { label: 'Şehir', width: 100 },
                                         { label: 'Konum', width: 120 },
-                                        { label: 'Tarih', width: 180 },
+                                        { label: 'Tarih', width: 160 },
                                         { label: 'Bilet Sayısı', width: 100 },
                                         { label: 'Fiyat', width: 80 },
-                                        { label: 'Satışta mı?', width: 100 },
-                                        { label: 'Banner’da mı?', width: 120 },
+                                        { label: 'Satışta mı?', width: 80 },
+                                        { label: 'Banner’da mı?', width: 100 },
                                         { label: 'Ayarlar', width: 140 }
                                     ].map((col) => (
                                         <TableCell
@@ -124,8 +124,8 @@ function AdminEventPage() {
                                             <img
                                                 src={`${import.meta.env.VITE_API_URL}${event.imageUrl}`}
                                                 alt={event.eventName}
-                                                width="160"
-                                                height="90"
+                                                width="120"
+                                                height="70"
                                                 style={{ borderRadius: 4 }}
                                             />
                                         </TableCell>
