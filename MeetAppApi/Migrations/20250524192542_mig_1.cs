@@ -82,8 +82,8 @@ namespace MeetAppApi.Migrations
                 {
                     table.PrimaryKey("PK_EventCategories", x => new { x.EventId, x.CategoryId });
                     table.ForeignKey(
-                        name: "FK_EventCategories_Categories_EventId",
-                        column: x => x.EventId,
+                        name: "FK_EventCategories_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -220,9 +220,9 @@ namespace MeetAppApi.Migrations
                 columns: new[] { "Id", "CreatedTime", "Email", "FirstName", "HashedPassword", "LastName", "Location", "Role", "UserName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 5, 20, 21, 11, 5, 161, DateTimeKind.Local).AddTicks(3889), "ensar.atc@gmail.com", "Ensar", "$2a$11$mVSKTS47oUdgPYbeaulHlOI.arCPZkXc/55Q3xzyMY8D38Q4nXRBK", "Atıcı", "Erzincan/TR", 1, "ensaratc_" },
-                    { 2, new DateTime(2025, 5, 20, 21, 11, 5, 161, DateTimeKind.Local).AddTicks(3907), "john@hotmail.com", "John", "$2a$11$T4KBuawt3/.QmoRkuHJHW.JmjZ4iOp7eNOzGnzbN2/LXAjGTxPcYe", "Doe", "Washington/US", 0, "john_doe" },
-                    { 3, new DateTime(2025, 5, 20, 21, 11, 5, 161, DateTimeKind.Local).AddTicks(3909), "yıldız@gmail.com", "Ahmet", "$2a$11$e0w508ZJyZo5wL3YWLVQLOmCemlgbIRKWrDJKghp5wrEy76iURLI6", "Yıldız", "Ankara/TR", 0, "Yıldız_1903" }
+                    { 1, new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8579), "ensar.atc@gmail.com", "Ensar", "$2a$11$cwkK02UIhQXib9gB3Oa18eg5co2Jtc.t0NYLiS7rS5fvEn4JZIl9m", "Atıcı", "Erzincan/TR", 1, "ensaratc_" },
+                    { 2, new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8595), "john@hotmail.com", "John", "$2a$11$uTpS5jUdyDpHfy6EpXim1.tuSMF3nWK8K0NO9w.mdzNln5FrQrDoq", "Doe", "Washington/US", 0, "john_doe" },
+                    { 3, new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8597), "yıldız@gmail.com", "Ahmet", "$2a$11$IUlDUwxm3cNcESYQ6mDSKuV23Z/XBOThCYiIKRShx//YjgzmvNA9m", "Yıldız", "Ankara/TR", 0, "Yıldız_1903" }
                 });
 
             migrationBuilder.InsertData(
@@ -332,6 +332,11 @@ namespace MeetAppApi.Migrations
                 table: "Carts",
                 column: "UserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventCategories_CategoryId",
+                table: "EventCategories",
+                column: "CategoryId");
         }
 
         /// <inheritdoc />

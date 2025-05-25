@@ -563,6 +563,8 @@ namespace MeetAppApi.Migrations
 
                     b.HasKey("EventId", "CategoryId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("EventCategories");
 
                     b.HasData(
@@ -894,10 +896,10 @@ namespace MeetAppApi.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedTime = new DateTime(2025, 5, 20, 21, 11, 5, 161, DateTimeKind.Local).AddTicks(3889),
+                            CreatedTime = new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8579),
                             Email = "ensar.atc@gmail.com",
                             FirstName = "Ensar",
-                            HashedPassword = "$2a$11$mVSKTS47oUdgPYbeaulHlOI.arCPZkXc/55Q3xzyMY8D38Q4nXRBK",
+                            HashedPassword = "$2a$11$cwkK02UIhQXib9gB3Oa18eg5co2Jtc.t0NYLiS7rS5fvEn4JZIl9m",
                             LastName = "Atıcı",
                             Location = "Erzincan/TR",
                             Role = 1,
@@ -906,10 +908,10 @@ namespace MeetAppApi.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedTime = new DateTime(2025, 5, 20, 21, 11, 5, 161, DateTimeKind.Local).AddTicks(3907),
+                            CreatedTime = new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8595),
                             Email = "john@hotmail.com",
                             FirstName = "John",
-                            HashedPassword = "$2a$11$T4KBuawt3/.QmoRkuHJHW.JmjZ4iOp7eNOzGnzbN2/LXAjGTxPcYe",
+                            HashedPassword = "$2a$11$uTpS5jUdyDpHfy6EpXim1.tuSMF3nWK8K0NO9w.mdzNln5FrQrDoq",
                             LastName = "Doe",
                             Location = "Washington/US",
                             Role = 0,
@@ -918,10 +920,10 @@ namespace MeetAppApi.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedTime = new DateTime(2025, 5, 20, 21, 11, 5, 161, DateTimeKind.Local).AddTicks(3909),
+                            CreatedTime = new DateTime(2025, 5, 24, 22, 25, 39, 689, DateTimeKind.Local).AddTicks(8597),
                             Email = "yıldız@gmail.com",
                             FirstName = "Ahmet",
-                            HashedPassword = "$2a$11$e0w508ZJyZo5wL3YWLVQLOmCemlgbIRKWrDJKghp5wrEy76iURLI6",
+                            HashedPassword = "$2a$11$IUlDUwxm3cNcESYQ6mDSKuV23Z/XBOThCYiIKRShx//YjgzmvNA9m",
                             LastName = "Yıldız",
                             Location = "Ankara/TR",
                             Role = 0,
@@ -982,7 +984,7 @@ namespace MeetAppApi.Migrations
                 {
                     b.HasOne("MeetAppApi.Models.Category", "Category")
                         .WithMany("Events")
-                        .HasForeignKey("EventId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1016,7 +1018,8 @@ namespace MeetAppApi.Migrations
 
             modelBuilder.Entity("MeetAppApi.Models.User", b =>
                 {
-                    b.Navigation("Cart");
+                    b.Navigation("Cart")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

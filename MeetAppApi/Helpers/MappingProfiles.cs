@@ -19,6 +19,10 @@ namespace MeetAppApi.Helpers
             CreateMap<CategoryDto, Category>(); 
             CreateMap<Cart,CartDto>();
             CreateMap<CartDto,Cart>();
+            CreateMap<AddEventDto,EventDto>();
+            CreateMap<EventDto, AddEventDto>();
+            CreateMap<EventDto, UpdateEventDto>();
+            CreateMap<UpdateEventDto, EventDto>();
 
         }    
     }

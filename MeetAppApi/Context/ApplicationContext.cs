@@ -26,7 +26,7 @@ namespace MeetAppApi.Context
             modelBuilder.Entity<EventCategory>()
                 .HasOne(c => c.Category)
                 .WithMany(c => c.Events)
-                .HasForeignKey(c => c.EventId);
+                .HasForeignKey(c => c.CategoryId);
 
 
             // One To One USER-CART 
