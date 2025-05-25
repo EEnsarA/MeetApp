@@ -1124,3 +1124,80 @@
 .buyCancelButton:hover{
     background-color: rgba(192, 8, 4, 0.843)
 }
+
+.adminDeleteButton{
+    text-decoration: none;
+    width: 120px;
+    height: 90px;
+    background-color:#b23024;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;    
+    font-weight: 500;
+    font-family: "Funnel Display" , sans-serif;
+    height: 32px;
+    border-radius: 6px;
+    color: #ffffff;
+}
+
+.adminDeleteButton:hover{
+    background-color: rgba(192, 8, 4, 0.843)
+}
+
+.adminEditButton{
+    text-decoration: none;
+    width: 120px;
+    height: 90px;
+    background-color:#014d57;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;    
+    font-weight: 500;
+    font-family: "Funnel Display" , sans-serif;
+    height: 32px;
+    border-radius: 6px;
+    color: #ffffff;
+}
+
+.adminEditButton:hover{
+    background-color: #026674;
+}
+
+.adminAddEventButton{
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 240px;
+    height: 80px;
+    background-color:#1aa21c;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;    
+    font-weight: 500;
+    font-family: "Funnel Display" , sans-serif;
+    height: 32px;
+    border-radius: 6px;
+    color: #ffffff;
+}
+
+.adminAddEventButton:hover{
+    background-color:#106b11;
+}
+
+input::file-selector-button {
+  font-weight: bold;
+  color: dodgerblue;
+  padding: 0.5em;
+  border: thin solid grey;
+  border-radius: 3px;
+}
+input::file-selector-button:hover {
+  cursor: pointer;
+  color: dodgerblue;
+  border: 2px solid rgb(86, 86, 86);
+  border-radius: 3px;
+}

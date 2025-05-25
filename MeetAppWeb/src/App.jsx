@@ -11,6 +11,9 @@ import CartPage from './pages/CartPage'
 import { useDispatch } from 'react-redux'
 import { calculateCart, getUserCart } from './redux/cartSlice'
 import AdminEventPage from './pages/AdminEventPage'
+import AdminUserPage from './pages/AdminUserPage'
+import AdminEventAddPage from './pages/AdminEventAddPage'
+import AdminEventUpdatePage from './pages/AdminEventUpdatePage'
 
 
 
@@ -19,8 +22,10 @@ function App() {
 
   useEffect(() => {
     const sessionUser = sessionStorage.getItem("current_user");
-    if (sessionUser) {
-      const userId = JSON.parse(sessionUser).nameid;
+    const currentUser = JSON.parse(sessionUser);
+    console.log(currentUser);
+    if (currentUser && currentUser.role != "Admin") {
+      const userId = currentUser.nameid;
       dispatch(getUserCart(userId)).then(() => {
         dispatch(calculateCart());
       });
@@ -39,6 +44,9 @@ function App() {
             <Route path='/category/:catName/:catId' element={<EventPage />}></Route>
             <Route path='/user-cart' element={<CartPage />}></Route>
             <Route path='/admin/events' element={<AdminEventPage />}></Route>
+            <Route path='/admin/users' element={<AdminUserPage />}></Route>
+            <Route path='/admin/events/add' element={<AdminEventAddPage />}></Route>
+            <Route path='/admin/events/update/:eventId' element={<AdminEventUpdatePage />}></Route>
           </Routes>
         </div>
         <Footer />

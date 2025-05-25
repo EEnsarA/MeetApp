@@ -138,7 +138,7 @@ function NavBar() {
                                     </>
                                     :
                                     <>
-                                        <Link className='navBarLinks'>
+                                        <Link to={"/admin/users"} className='navBarLinks'>
                                             <div className='navbarProfileDiv'>
                                                 <FaUsers className='navbarProfile' />
                                                 <span>Kullanıcılar</span>

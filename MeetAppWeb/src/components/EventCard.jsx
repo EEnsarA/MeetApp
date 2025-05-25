@@ -14,7 +14,7 @@ function EventCard(props) {
                 <div className='eventCardDiv'>
                     <Grid container spacing={2}>
                         <Grid size={{ xs: 6, md: 6 }}>
-                            <div style={{ height: "100%" }}>
+                            <div style={{ height: "240px" }}>
                                 <img src={`${import.meta.env.VITE_API_URL}${event.imageUrl}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", borderTopLeftRadius: "8px", borderBottomLeftRadius: "8px" }} />
                             </div>
                         </Grid>

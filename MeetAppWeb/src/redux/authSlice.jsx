@@ -4,13 +4,14 @@ import { jwtDecode } from "jwt-decode"
 
 const REGISTER = "http://localhost:5134/api/Users/register";
 const LOGIN = "http://localhost:5134/api/Users/login";
-
+const USER_GET = "http://localhost:5134/api/Users";
 
 
 const token = sessionStorage.getItem("token");
 const user = token ? jwtDecode(token) : null;
 
 const initialState = {
+    users: [],
     registeredUser: null,
     errMessage: "",
     loading: false,
@@ -40,6 +41,19 @@ export const login = createAsyncThunk("login", async (userInfo, { rejectWithValu
         return rejectWithValue(err.response.data);
     }
 })
+
+export const getAllUsers = createAsyncThunk("users", async (_, thunkAPI) => {
+    try {
+        const response = await axios(USER_GET);
+        return response.data;
+
+    } catch (err) {
+        console.log(err.message);
+        return thunkAPI.rejectWithValue(err.response?.data || "Sunucu hatası");
+    }
+});
+
+
 
 
 
@@ -84,6 +98,17 @@ const authSlice = createSlice({
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
                 state.errMessage = action.payload;
+            })
+            .addCase(getAllUsers.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getAllUsers.fulfilled, (state, action) => {
+                state.loading = false;
+                state.users = action.payload;
+            })
+            .addCase(getAllUsers.rejected, (state, action) => {
+                state.errMessage = action.payload;
+                state.loading = false;
             })
     }
 })
