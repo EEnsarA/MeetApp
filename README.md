@@ -87,7 +87,19 @@ MeetApp/
 ```
 **⚠️ Do not share your real connection string or secret key publicly!**
 
-3.  **Run the API project:**
+3. #### 🗃️ Database Setup
+**This project includes the required Entity Framework Core migrations.**
+
+**To create and update your local SQL Server database, run the following command inside the MeetAppApi project directory:**
+
+```bash
+    dotnet ef database update   
+```
+**This will apply the existing migrations and create the necessary tables.**
+
+**⚠️ Make sure your connection string is properly configured in appsettings.Development.json before running this command.**
+
+4.  **Run the API project:**
 
 **Use Visual Studio, Rider, or the .NET CLI:**
 ```bash
